@@ -11,7 +11,6 @@ namespace MedicalTansik.Models
 		[Key]
 		public long Id {set; get;}
 		[Required]
-		[Index(IsUnique = true)]
 		public string Name {set; get;}
 	}
 }

@@ -11,7 +11,6 @@ namespace MedicalTansik.Models
 	{
 
 		
-		public bool isStudent { set; get; } = true;
 		public Student student {set; get;}
 
 

@@ -16,7 +16,7 @@ namespace MedicalTansik.Models
 		public string Name { get; set; }
 		[Required]
 		[DataType(DataType.PhoneNumber)]
-		[Display(Name = "ÑŞã ÇáÊáíİæä")]
+		[Display(Name = "ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
 		public string PhoneNumber { set; get; }
 		[Required]
 		public string Gender {set; get;}
