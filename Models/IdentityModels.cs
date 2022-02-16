@@ -11,17 +11,17 @@ namespace MedicalTansik.Models
 	{
 
 		
-		public Student student {set; get;}
+		public Student Student {set; get;}
+		public bool IsStudent { set; get; }
+		public bool DataConfirmed { set; get; }
 
-
-
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-		{
-			// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-			var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-			// Add custom user :claims here
-			return userIdentity;
-		}
+  //      public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+		//{
+		//	// Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+		//	var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+		//	// Add custom user :claims here
+		//	return userIdentity;
+		//}
 	}
 
 }

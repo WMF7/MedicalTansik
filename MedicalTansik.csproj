@@ -167,16 +167,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202202132235199_initial.cs" />
-    <Compile Include="Migrations\202202132235199_initial.Designer.cs">
-      <DependentUpon>202202132235199_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202202132238128_seeding_medical_subjects.cs" />
-    <Compile Include="Migrations\202202132238128_seeding_medical_subjects.Designer.cs">
-      <DependentUpon>202202132238128_seeding_medical_subjects.cs</DependentUpon>
+    <Compile Include="Migrations\202202161124141_initial.cs" />
+    <Compile Include="Migrations\202202161124141_initial.Designer.cs">
+      <DependentUpon>202202161124141_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\StudentSubjectDegree.cs" />
@@ -266,11 +261,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202202132235199_initial.resx">
-      <DependentUpon>202202132235199_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202202132238128_seeding_medical_subjects.resx">
-      <DependentUpon>202202132238128_seeding_medical_subjects.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202161124141_initial.resx">
+      <DependentUpon>202202161124141_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

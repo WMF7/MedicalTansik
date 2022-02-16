@@ -16,7 +16,7 @@ namespace MedicalTansik.Models
 		public string Name { get; set; }
 		[Required]
 		[DataType(DataType.PhoneNumber)]
-		[Display(Name = "��� ��������")]
+		[Display(Name = "رقم الهاتف")]
 		public string PhoneNumber { set; get; }
 		[Required]
 		public string Gender {set; get;}
@@ -25,7 +25,6 @@ namespace MedicalTansik.Models
 		public string City {set; get;}
 		public string Governate { set; get; }
 		[Required]
-		
 		public string BirthDay {set; get;}
 		[Required]
 		public string BirthMonth {set; get;}
