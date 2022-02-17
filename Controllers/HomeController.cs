@@ -1,11 +1,13 @@
-﻿using System;
+﻿using MedicalTansik.Lib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MedicalTansik.Controllers
-{[Authorize]
+{
+	[Authorize]
 	public class HomeController : Controller
 	{
 		public ActionResult Index()
@@ -25,6 +27,13 @@ namespace MedicalTansik.Controllers
 			ViewBag.Message = "Your contact page.";
 
 			return View();
+		}
+
+		public string Test()
+		{
+			DBUtils db = new DBUtils();
+			db.CreateUsersHelber();
+			return "done";
 		}
 	}
 }

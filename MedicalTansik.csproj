@@ -167,9 +167,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Utils.cs" />
     <Compile Include="Migrations\202202161124141_initial.cs" />
     <Compile Include="Migrations\202202161124141_initial.Designer.cs">
       <DependentUpon>202202161124141_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202161548095_remove_grad_require.cs" />
+    <Compile Include="Migrations\202202161548095_remove_grad_require.Designer.cs">
+      <DependentUpon>202202161548095_remove_grad_require.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202171405243_add_national_id_to_users.cs" />
+    <Compile Include="Migrations\202202171405243_add_national_id_to_users.Designer.cs">
+      <DependentUpon>202202171405243_add_national_id_to_users.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
@@ -263,6 +272,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202202161124141_initial.resx">
       <DependentUpon>202202161124141_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202161548095_remove_grad_require.resx">
+      <DependentUpon>202202161548095_remove_grad_require.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202171405243_add_national_id_to_users.resx">
+      <DependentUpon>202202171405243_add_national_id_to_users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

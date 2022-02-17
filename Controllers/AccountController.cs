@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -47,7 +48,7 @@ namespace MedicalTansik.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUser>();
+                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUser>();
             }
             private set
             {
@@ -86,12 +87,13 @@ namespace MedicalTansik.Controllers
 
             if(applicationUser.PasswordHash == model.Password)
 			{
-             //  await new SignInManager.SignInAsync(applicationUser, false, false);
-                return Redirect("https://www.google.com");
+                await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser:false);
+                return RedirectToAction("Index", "Home");
 
             } else
 			{
                 ModelState.AddModelError("", "خطأ في الدخول، تأكد من الرقم القومي أو كلمة المرور");
+                return View();
 			}
             //var t = _db.Users.Where(a => a.PasswordHash == model.Password && a.IsStudent == true).FirstOrDefault();
             //var r = (from s in db.students where s.NatId == model.NationalId select s).FirstOrDefault();

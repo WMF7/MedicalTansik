@@ -1,7 +1,8 @@
 namespace MedicalTansik.Migrations
 {
     using System;
-    using System.Data.Entity;
+	using System.Collections.Generic;
+	using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -11,6 +12,7 @@ namespace MedicalTansik.Migrations
         {
             AutomaticMigrationsEnabled = false;
         }
+
 
         protected override void Seed(MedicalTansik.Models.ApplicationDbContext context)
         {

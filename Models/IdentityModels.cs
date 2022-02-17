@@ -10,7 +10,7 @@ namespace MedicalTansik.Models
 	public class ApplicationUser : IdentityUser
 	{
 
-		
+		public string NatId {set; get;}
 		public Student Student {set; get;}
 		public bool IsStudent { set; get; }
 		public bool DataConfirmed { set; get; }
