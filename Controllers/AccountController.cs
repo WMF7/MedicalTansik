@@ -77,7 +77,7 @@ namespace MedicalTansik.Controllers
                 return View(model);
             }
             //TODO: check if student;
-            ApplicationUser applicationUser = db.Users.Where(a => a.Student.NatId == model.NationalId).FirstOrDefault();
+            ApplicationUser applicationUser = db.Users.Where(a => a.NatId == model.NationalId).FirstOrDefault();
 
             if(applicationUser == null)
 			{
@@ -88,7 +88,13 @@ namespace MedicalTansik.Controllers
             if(applicationUser.PasswordHash == model.Password)
 			{
                 await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser:false);
-                return RedirectToAction("Index", "Home");
+                if(StudentDataConfirmed(applicationUser))
+				{
+                    return RedirectToAction("ConfirmStudentData", "Home");
+                } else
+				{
+                    return RedirectToAction("Index", "Home");
+                }
 
             } else
 			{
@@ -132,11 +138,16 @@ namespace MedicalTansik.Controllers
             return Redirect("https://www.example.com");
         }
 
-   
+		private bool StudentDataConfirmed(ApplicationUser applicationUser)
+		{
+            return applicationUser.IsStudent;
+		}
 
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
+
+
+		//
+		// GET: /Account/Register
+		[AllowAnonymous]
         public ActionResult Register()
         {
             return View();

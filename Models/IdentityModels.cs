@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MedicalTansik.Models
 {
+	
 	// You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
 	public class ApplicationUser : IdentityUser
 	{
@@ -14,6 +15,7 @@ namespace MedicalTansik.Models
 		public Student Student {set; get;}
 		public bool IsStudent { set; get; }
 		public bool DataConfirmed { set; get; }
+
 
   //      public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
 		//{

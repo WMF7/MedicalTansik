@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "تأكيد بيانات الطالب";
+}
+
+<h2>ConfirmStudentData</h2>
+
+
+
+
+<div class="jumbotron">
+    <h2 style="text-align:Center">
+        الرجاء مراجعة بياناتك وقم بالتاكد من صحتها واذا تبين وجود خطأ في البيانات تواصل مع شئون الطلبة فورا
+    </h2>
+
+</div>
+
+
+
+
+<div class="row">
+    <div>
+        هنا إن شاء الله هنعرضله بياناته بالشكل اللي احنا عايزينه
+    </div>
+
+    @using (Html.BeginForm("ConfirmStudentDataPost", "Home", FormMethod.Post, null))
+    {
+        <button>تأكيد</button>
+    }
+</div>

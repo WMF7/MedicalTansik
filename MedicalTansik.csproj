@@ -201,6 +201,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\mdb\css\mdb.dark.min.css" />
+    <Content Include="Content\mdb\css\mdb.dark.rtl.min.css" />
+    <Content Include="Content\mdb\css\mdb.min.css" />
+    <Content Include="Content\mdb\css\mdb.rtl.min.css" />
+    <Content Include="Content\mdb\img\mdb-favicon.ico" />
+    <Content Include="Content\mdb\js\mdb.min.js" />
+    <Content Include="Content\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -213,6 +220,11 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\mdb\css\mdb.dark.min.css.map" />
+    <Content Include="Content\mdb\css\mdb.dark.rtl.min.css.map" />
+    <Content Include="Content\mdb\css\mdb.min.css.map" />
+    <Content Include="Content\mdb\css\mdb.rtl.min.css.map" />
+    <Content Include="Content\mdb\js\mdb.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -260,6 +272,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\ConfirmStudentData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

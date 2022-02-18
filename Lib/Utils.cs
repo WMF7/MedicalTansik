@@ -5,6 +5,9 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace MedicalTansik.Lib
 {
@@ -37,12 +40,14 @@ namespace MedicalTansik.Lib
 			{
 				ApplicationUser application = new ApplicationUser()
 				{
-					IsStudent = true,
-					DataConfirmed = false,
-					PasswordHash = this.GenerateBassword(),
-					PhoneNumber = student.PhoneNumber,
-					UserName = student.NatId,
-					Student = student,
+					IsStudent		= true,
+					DataConfirmed	= false,
+					PasswordHash	= this.GenerateBassword(),
+					PhoneNumber		= student.PhoneNumber,
+					UserName		= student.NatId,
+					Student			= student,
+					NatId			= student.NatId,
+					SecurityStamp   = Guid.NewGuid().ToString(),
 				};
 				try
 				{
@@ -54,6 +59,23 @@ namespace MedicalTansik.Lib
 				}
 			}
 		}
+
+		public static ApplicationUser GetLoggedInUser(String userId)
+		{
+			ApplicationDbContext db = new ApplicationDbContext();
+			ApplicationUser user = db.Users.Include("Student").Where(u => u.Id == userId).FirstOrDefault();
+			return user;
+		}
+
+		public static Student GetLoggedInStudent(String userId)
+		{
+			ApplicationUser user = DBUtils.GetLoggedInUser(userId);
+			Student student = user.Student;
+			return student;
+		}
+
+
+
 
 	}
 }
