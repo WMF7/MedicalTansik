@@ -77,7 +77,7 @@ namespace MedicalTansik.Controllers
                 return View(model);
             }
             //TODO: check if student;
-            ApplicationUser applicationUser = db.Users.Where(a => a.NatId == model.NationalId).FirstOrDefault();
+            ApplicationUser applicationUser = db.Users.Where(a => a.UserName == model.NationalId).FirstOrDefault();
 
             if(applicationUser == null)
 			{

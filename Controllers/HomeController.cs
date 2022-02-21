@@ -81,7 +81,7 @@ namespace MedicalTansik.Controllers
 		public string Test()
 		{
 			DBUtils db = new DBUtils();
-			db.CreateUsersHelber();
+			db.CreateMedicalSubjects();
 			return "done";
 		}
 

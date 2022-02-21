@@ -180,6 +180,14 @@
     <Compile Include="Migrations\202202171405243_add_national_id_to_users.Designer.cs">
       <DependentUpon>202202171405243_add_national_id_to_users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202200955518_add_is_academic.cs" />
+    <Compile Include="Migrations\202202200955518_add_is_academic.Designer.cs">
+      <DependentUpon>202202200955518_add_is_academic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202201002413_set_is_academic_false.cs" />
+    <Compile Include="Migrations\202202201002413_set_is_academic_false.Designer.cs">
+      <DependentUpon>202202201002413_set_is_academic_false.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -291,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202171405243_add_national_id_to_users.resx">
       <DependentUpon>202202171405243_add_national_id_to_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202200955518_add_is_academic.resx">
+      <DependentUpon>202202200955518_add_is_academic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202201002413_set_is_academic_false.resx">
+      <DependentUpon>202202201002413_set_is_academic_false.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
