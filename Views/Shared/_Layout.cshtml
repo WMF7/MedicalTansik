@@ -39,7 +39,7 @@
         </div>
     </div>*@
 
-    <div class="container body-content">
+    <div class="container body-content" ondropover="allowDrop(event)">
         @RenderBody()
 
         <footer>
@@ -50,5 +50,31 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Content/mdb/js/mdb.min.js")
     @RenderSection("scripts", required: false)
+
+    <script>
+     function dragDesireStart(event) {
+	 event.target.classList.add("dragged");
+	 console.log(event.target);
+     }
+
+     function dragDesireEnd(event) {
+	 event.target.classList.remove("dragged");
+	 console.log(event.target);
+     }
+
+     function allowDrop(event) {
+	 event.preventDefault();
+     }
+
+     function dropDesire(event) {
+	 event.preventDefault();
+     }
+
+     function drop(event) {
+	 $(".dragged").appendTo("#student-desires-container");
+     }
+
+    </script>
+
 </body>
 </html>

@@ -24,6 +24,9 @@ namespace MedicalTansik.Controllers
 			{
 				return RedirectToAction("ConfirmStudentData", "Home");
 			}
+
+			List<Desire> desires = this.db.Desires.ToList();
+			ViewBag.Desires = desires;
 			return View();
 		}
 

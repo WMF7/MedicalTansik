@@ -87,7 +87,7 @@ namespace MedicalTansik.Controllers
 
             if(applicationUser.PasswordHash == model.Password)
 			{
-                await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser:false);
+                await SignInManager.SignInAsync(applicationUser, isPersistent: true, rememberBrowser:false);
                 if(StudentDataConfirmed(applicationUser))
 				{
                     return RedirectToAction("ConfirmStudentData", "Home");
