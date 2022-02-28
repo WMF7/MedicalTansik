@@ -11,33 +11,33 @@
 
 </head>
 <body dir="rtl">
-    
+
 
 
     @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-                <a href="/Home/Index" class="navbar-brand">
-                    <img src="~/Content/img/i.png" />
-                   </a>
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-</div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "مراجعة بيانات الطالب")</li>
-                    <li>@Html.ActionLink("Home", "Index", "الرئيسية")</li>
-                    <li>@Html.ActionLink("Home", "Index", "لسه مش عارفه")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+                        <a href="/Home/Index" class="navbar-brand">
+                            <img src="~/Content/img/i.png" />
+                           </a>
+
         </div>
-    </div>*@
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "مراجعة بيانات الطالب")</li>
+                            <li>@Html.ActionLink("Home", "Index", "الرئيسية")</li>
+                            <li>@Html.ActionLink("Home", "Index", "لسه مش عارفه")</li>
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>*@
 
     <div class="container body-content" ondropover="allowDrop(event)">
         @RenderBody()
@@ -50,31 +50,24 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Content/mdb/js/mdb.min.js")
     @RenderSection("scripts", required: false)
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js" integrity="sha512-zYXldzJsDrNKV+odAwFYiDXV2Cy37cwizT+NkuiPGsa9X1dOz04eHvUWVuxaJ299GvcJT31ug2zO4itXBjFx4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <script>
-     function dragDesireStart(event) {
-	 event.target.classList.add("dragged");
-	 console.log(event.target);
-     }
 
-     function dragDesireEnd(event) {
-	 event.target.classList.remove("dragged");
-	 console.log(event.target);
-     }
+        var element = $("#desires-container")[0];
+        new Sortable(element, {
+            group: 'shared',
+            animation: 150
+        });
+        var element2 = $("#student-desires-container")[0];
 
-     function allowDrop(event) {
-	 event.preventDefault();
-     }
-
-     function dropDesire(event) {
-	 event.preventDefault();
-     }
-
-     function drop(event) {
-	 $(".dragged").appendTo("#student-desires-container");
-     }
+        new Sortable(element2, {
+            group: 'shared',
+            animation   : 150
+        });
 
     </script>
+
 
 </body>
 </html>

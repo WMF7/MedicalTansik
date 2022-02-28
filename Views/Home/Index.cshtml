@@ -47,8 +47,7 @@
 
 		@foreach(var desire in ViewBag.Desires)
 		{
-		<div class="card desire my-4"  style="cursor: move" draggable="true" ondragstart="dragDesireStart(event)"
-		     ondragend="dragDesireEnd(event)"> 
+		<div class="card desire my-4"  style="cursor: move"> 
 		    <div class="card-body">
 			<div>
 			    @desire.Name
@@ -58,9 +57,9 @@
 		}
 	    </div>
 
-	    <div class="col-sm-6">
-		<div id="student-desires-container" style="background-color: lightblue; height: 100%"
-		ondragover="allowDrop(event)" ondrop="drop(event)" >
+	    <div class="col-sm-6 ">
+		<div class="py-4 px-4" id="student-desires-container" style="        background-color: #E4F6F8;
+        height: 100%">
 		    
 		</div>
 	    </div>

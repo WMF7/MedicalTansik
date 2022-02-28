@@ -110,28 +110,28 @@ namespace MedicalTansik.Lib
             desires.Add(desire);
             desires.Add(desire1);
             desires.Add(desire2);
-			desires.Add(desire3);
-			desires.Add(desire4);
-			desires.Add(desire5);
-			desires.Add(desire6);
-			desires.Add(desire7);
-			desires.Add(desire8);
-			desires.Add(desire9);
-			desires.Add(desire10);
-			desires.Add(desire11);
-			desires.Add(desire12);
-			desires.Add(desire13);
-			desires.Add(desire14);
-			desires.Add(desire15);
-			desires.Add(desire16);
-			desires.Add(desire17);
-			desires.Add(desire18);
-			desires.Add(desire19);
-			desires.Add(desire20);
-			desires.Add(desire21);
-			desires.Add(desire22);
-			desires.Add(desire23);
-			desires.Add(desire24);
+            desires.Add(desire3);
+            desires.Add(desire4);
+            desires.Add(desire5);
+            desires.Add(desire6);
+            desires.Add(desire7);
+            desires.Add(desire8);
+            desires.Add(desire9);
+            desires.Add(desire10);
+            desires.Add(desire11);
+            desires.Add(desire12);
+            desires.Add(desire13);
+            desires.Add(desire14);
+            desires.Add(desire15);
+            desires.Add(desire16);
+            desires.Add(desire17);
+            desires.Add(desire18);
+            desires.Add(desire19);
+            desires.Add(desire20);
+            desires.Add(desire21);
+            desires.Add(desire22);
+            desires.Add(desire23);
+            desires.Add(desire24);
 
             context.Desires.AddRange(desires);
             context.SaveChanges();
@@ -140,14 +140,14 @@ namespace MedicalTansik.Lib
 
         public void CreateAcademicalDesires() {
 
-			ApplicationDbContext context = new ApplicationDbContext();
-						
+            ApplicationDbContext context = new ApplicationDbContext();
+
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الفارماكولوجي", IsAcademic = true });
-			context.Desires.AddOrUpdate(new Desire() {Name="قسم الفسيولوجيا الطبية", IsAcademic = true});
+            context.Desires.AddOrUpdate(new Desire() { Name = "قسم الفسيولوجيا الطبية", IsAcademic = true });
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الهستولوجي", IsAcademic = true });
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الصحة العامة", IsAcademic = true });
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الميكروبيولوجي", IsAcademic = true });
-			context.Desires.AddOrUpdate(new Desire() { Name="قسم التشريح", IsAcademic = true});
+            context.Desires.AddOrUpdate(new Desire() { Name = "قسم التشريح", IsAcademic = true });
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الطفيليات", IsAcademic = true });
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الباثولوجيا", IsAcademic = true });
             context.Desires.AddOrUpdate(new Desire() { Name = "قسم الكيمياء الحيوية", IsAcademic = true });
@@ -157,24 +157,24 @@ namespace MedicalTansik.Lib
 
             context.SaveChanges();
         }
-		
+
 
         public void CreateMedicalSubjects() {
-			
-			ApplicationDbContext context = new ApplicationDbContext();
+
+            ApplicationDbContext context = new ApplicationDbContext();
 
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التوليد وامراض النسا" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() {Name = "الباطنة العامة"});
-			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() {Name = "جراحة الانف والاذن والحنجرة"});
-			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() {Name = "طب الاطفال"});
-			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() {Name = "الجراحة العامة"});
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الباطنة العامة" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "جراحة الانف والاذن والحنجرة" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "طب الاطفال" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الجراحة العامة" });
 
-			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفارماكولوجي" });
-			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفسيولوجيا الطبية"});
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفارماكولوجي" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفسيولوجيا الطبية" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الهستولوجي" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الصحة العامة" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الميكروبيولوجي" });
-			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name="التشريح"});
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التشريح" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الطفيليات" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الباثولوجيا" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الكيمياء الحيوية" });
@@ -187,10 +187,29 @@ namespace MedicalTansik.Lib
         }
 
 
+        public void CreateAUser()
+        {
 
+            ApplicationDbContext context = new ApplicationDbContext();
+            string EmpUserName = "hend";
+            string EmpNationalID = "22603082601260";
+            string phoneNum = "11111111111";
+            ApplicationUser application = new ApplicationUser()
+            {
+                IsStudent = false,
+                DataConfirmed = false,
+                PasswordHash = this.GenerateBassword(),
+                PhoneNumber = phoneNum,
+                UserName = EmpUserName,
+                Student = null,
+                NatId = EmpNationalID,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+          
+            context.Users.Add(application);
+            context.SaveChanges();
 
-
-
+        }
 
 
 

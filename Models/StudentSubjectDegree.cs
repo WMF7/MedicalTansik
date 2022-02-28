@@ -13,5 +13,6 @@ namespace MedicalTansik.Models
 		public Student Student { set; get; }
 		public MedicalSubject MedicalSubject { set; get; }
 		public int degree { set; get; }
+		public string Takdeer { set; get; }
 	}
 }
