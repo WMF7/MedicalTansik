@@ -79,63 +79,53 @@ namespace MedicalTansik.Controllers
             //TODO: check if student;
             ApplicationUser applicationUser = db.Users.Where(a => a.UserName == model.NationalId).FirstOrDefault();
 
-            if(applicationUser == null)
-			{
-                ModelState.AddModelError("", "لا يوجد طالب بهذا الرقم القومي");
-                return View(model);
-			}
 
-            if(applicationUser.PasswordHash == model.Password)
-			{
-                await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser:false);
-                if(StudentDataConfirmed(applicationUser))
-				{
-                    return RedirectToAction("ConfirmStudentData", "Home");
-                } else
-				{
-                    return RedirectToAction("Index", "Home");
+            if (applicationUser == null)
+            {
+                ModelState.AddModelError("", "لا يوجد مستخدم بهذا الرقم القومي");
+                return View(model);
+
+            }
+            else
+            {
+                //if (applicationUser.IsStudent == true)
+                //{
+                //    ModelState.AddModelError("", "لا يوجد طالب بهذا الرقم القومي");
+                //    return View(model);
+                //}
+                //else if (applicationUser.IsStudent == false)
+                //{
+                //    ModelState.AddModelError("", "لا يوجد موظف بهذا الرقم القومي");
+                //    return View(model);
+                //}
+                
+
+                if (applicationUser.PasswordHash == model.Password)
+                {
+                    await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser: false);
+                    if (applicationUser.IsStudent == true)
+                    {
+                        if (StudentDataConfirmed(applicationUser))
+                        {
+                            return RedirectToAction("ConfirmStudentData", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "خطأ في الدخول، تأكد من الرقم القومي أو كلمة المرور");
+                    return View();
                 }
 
-            } else
-			{
-                ModelState.AddModelError("", "خطأ في الدخول، تأكد من الرقم القومي أو كلمة المرور");
-                return View();
-			}
-            //var t = _db.Users.Where(a => a.PasswordHash == model.Password && a.IsStudent == true).FirstOrDefault();
-            //var r = (from s in db.students where s.NatId == model.NationalId select s).FirstOrDefault();
-
-            //////switch (result)
-            //////{
-            //////    case SignInStatus.Success:
-            //////        return RedirectToLocal(returnUrl);
-            //////    case SignInStatus.LockedOut:
-            //////        return View("Lockout");
-            //////    case SignInStatus.RequiresVerification:
-            //////        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
-            //////    case SignInStatus.Failure:
-            //////    default:
-            //////        ModelState.AddModelError("", "محاولة ادخال خاطئة");
-            //////        return View(model);
-            //////}
-
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
-            //{
-            //    case SignInStatus.Success:
-            //        return RedirectToLocal(returnUrl);
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Invalid login attempt.");
-            //        return View(model);
-            //}
-            return Redirect("https://www.example.com");
+            }
         }
 
 		private bool StudentDataConfirmed(ApplicationUser applicationUser)
