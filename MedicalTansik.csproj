@@ -167,6 +167,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Tansik.cs" />
     <Compile Include="Lib\Utils.cs" />
     <Compile Include="Migrations\202202161124141_initial.cs" />
     <Compile Include="Migrations\202202161124141_initial.Designer.cs">

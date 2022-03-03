@@ -8,10 +8,17 @@ namespace MedicalTansik.Lib
 {
 	public class Tansik
 	{
+
+		/*
+		  How tansik works - 
+		  we hve a list of student desires 
+		 */
 		public List<InstantResult> DoIt(List<StudentDesire> studentDesires)
 		{
+			
 			return null;
 		}
+		
 	}
 
 
