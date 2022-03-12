@@ -1,5 +1,18 @@
 ﻿@model MedicalTansik.Models.Student
 
+@section styles {
+	<style>
+		.desires-wrapper {
+		overflow: auto;
+		height: 80vh;
+	}
+		.academic-desire {
+		background-color: lightpink;
+	}
+
+	</style>
+}
+	
 <!-- Tabs navs -->
 <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
     <li class="nav-item" role="presentation">
@@ -43,14 +56,14 @@
          aria-labelledby="ex1-tab-1">
 
 	<div class="row">
-	    <div id="desires-container" style="background-color: #eeeeee" class="col-sm-6">
+	    <div id="desires-container"  class="col-sm-6 desires-wrapper">
 
 		@foreach(var desire in ViewBag.Desires)
 		{
-		<div class="card desire my-4"  style="cursor: move"> 
+		<div class='card desire @(desire.IsAcademic? "academic-desire" : "clinical-desire") my-4 '  style="cursor: move"> 
 		    <div class="card-body">
 			<div>
-			    @desire.Name
+		@desire.Name - @(desire.IsAcademic? "أكاديمي" : "إكلينيكي")
 			</div>
 		    </div>
 		</div>
@@ -58,8 +71,7 @@
 	    </div>
 
 	    <div class="col-sm-6 ">
-		<div class="py-4 px-4" id="student-desires-container" style="        background-color: #E4F6F8;
-        height: 100%">
+		<div class="py-4 px-4 desires-wrapper" id="student-desires-container">
 		    
 		</div>
 	    </div>
@@ -75,4 +87,41 @@
         Tab 3 content
     </div>
 </div>
-<!-- Tabs content -->
+
+
+	<div> <button class="btn btn-primary save">حفظ</button></div>
+
+	<!-- Tabs content -->
+
+@section Scripts {
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    
+    <script>
+
+     var element = $("#desires-container")[0];
+     new Sortable(element, {
+         group: 'shared',
+         animation: 150
+			 
+     });
+     var element2 = $("#student-desires-container")[0];
+
+     new Sortable(element2, {
+         group: 'shared',
+         animation   : 150
+     });
+
+
+	 $(".save").on("click", function() {
+			 $.ajax("/Home/SaveDesires/", {
+					 method: "POST",
+					 success: function(data) {
+						 console.log(data);
+					 }
+				 });
+		 });
+	 </script>
+
+    
+}

@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/mdb/css/mdb.min.css")
     @Styles.Render("~/Content/main.css")
-
+    @RenderSection("styles", required: false)
 </head>
 <body dir="rtl">
 
@@ -25,23 +25,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Content/mdb/js/mdb.min.js")
     @RenderSection("scripts", required: false)
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js" integrity="sha512-zYXldzJsDrNKV+odAwFYiDXV2Cy37cwizT+NkuiPGsa9X1dOz04eHvUWVuxaJ299GvcJT31ug2zO4itXBjFx4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <script>
-
-        var element = $("#desires-container")[0];
-        new Sortable(element, {
-            group: 'shared',
-            animation: 150
-        });
-        var element2 = $("#student-desires-container")[0];
-
-        new Sortable(element2, {
-            group: 'shared',
-            animation   : 150
-        });
-
-    </script>
 
 
 </body>

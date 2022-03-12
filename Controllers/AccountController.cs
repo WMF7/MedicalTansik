@@ -70,8 +70,8 @@ namespace MedicalTansik.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-           public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-            {
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        {
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -79,33 +79,45 @@ namespace MedicalTansik.Controllers
             //TODO: check if student;
             ApplicationUser applicationUser = db.Users.Where(a => a.UserName == model.NationalId).FirstOrDefault();
 
-            if(applicationUser == null)
-			{
-                ModelState.AddModelError("", "لا يوجد طالب بهذا الرقم القومي");
-                return View(model);
-			}
 
-            if(applicationUser.PasswordHash == model.Password)
-			{
-                await SignInManager.SignInAsync(applicationUser, isPersistent: true, rememberBrowser:false);
-                if(StudentDataConfirmed(applicationUser))
-				{
-                    return RedirectToAction("ConfirmStudentData", "Home");
-                } else
-				{
-                    return RedirectToAction("Index", "Home");
+            if (applicationUser == null)
+            {
+                ModelState.AddModelError("", "لا يوجد مستخدم بهذا الرقم القومي");
+                return View(model);
+
+            }
+            else
+            {
+        
+                if (applicationUser.PasswordHash == model.Password)
+                {
+                    await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser: false);
+                    if (applicationUser.IsStudent == true)
+                    {
+                        if (StudentDataConfirmed(applicationUser))
+                        {
+                            return RedirectToAction("ConfirmStudentData", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "خطأ في الدخول، تأكد من الرقم القومي أو كلمة المرور");
+                    return View();
                 }
 
-            } else
-			{
-                ModelState.AddModelError("", "خطأ في الدخول، تأكد من الرقم القومي أو كلمة المرور");
-                return View();
-			}
-
-            return Redirect("https://www.example.com");
+            }
         }
 
-		private bool StudentDataConfirmed(ApplicationUser applicationUser)
+        private bool StudentDataConfirmed(ApplicationUser applicationUser)
 		{
             return applicationUser.IsStudent;
 		}

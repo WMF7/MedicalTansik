@@ -62,6 +62,38 @@ namespace MedicalTansik.Lib
             }
         }
 
+        public void CreateUsersEmployees()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            string EmpUserName = "22603082601260";
+            string EmpNationalID = "22603082601260";
+            string phoneNum = "11111111111";
+
+            ApplicationUser application = new ApplicationUser()
+            {
+                IsStudent = false,
+                DataConfirmed = false,
+                PasswordHash = this.GenerateBassword(),
+                PhoneNumber = phoneNum,
+                UserName = EmpUserName,
+                Student = null,
+                NatId = EmpNationalID,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+            try
+            {
+                context.Users.Add(application);
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e.EntityValidationErrors);
+            }
+
+        }
+
+
+
         public static ApplicationUser GetLoggedInUser(String userId)
         {
             ApplicationDbContext db = new ApplicationDbContext();

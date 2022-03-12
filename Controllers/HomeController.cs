@@ -24,8 +24,12 @@ namespace MedicalTansik.Controllers
 			{
 				return RedirectToAction("ConfirmStudentData", "Home");
 			}
-
-			List<Desire> desires = this.db.Desires.ToList();
+			
+            if (TansikUtils.StudentDidDoTansik(DBUtils.GetLoggedInStudent(User.Identity.GetUserId())))
+            {
+                return Content("<h1> this student alread did tansik, one day, and that day may never come, we will have a nice good looking page to tell the student that.</h1>");
+            }
+            List<Desire> desires = this.db.Desires.ToList();
 			ViewBag.Desires = desires;
 			return View();
 		}
@@ -78,14 +82,43 @@ namespace MedicalTansik.Controllers
 				}
 
 			}
+
 			return RedirectToAction("Index", "Home");
 		}
 
-		public string Test()
+
+		[HttpPost]
+        public ActionResult SaveDesires()
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            result.Add("name", "Walid Moustafa");
+            return Json(result);
+        }
+
+        public string Test()
 		{
-			DBUtils db = new DBUtils();
-			db.CreateAUser();
-			return "done";
+			
+			ApplicationDbContext db = new ApplicationDbContext();
+			String resultString = "";
+			Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Student").ToList());
+			tansik.DoIt();
+			Dictionary<String, List<Student>> results =tansik.GetResults();
+			foreach(KeyValuePair<String, List<Student>> entry in results)
+			{
+				resultString += entry.Key;
+				resultString += "<br>";
+				foreach(Student student in entry.Value)
+				{
+					resultString += student.Name;
+					resultString += "--";
+				}
+				resultString += "<br>";
+				resultString += "<br>";
+				resultString += "<br>";
+				resultString += "<br>";
+
+			}
+			return resultString;
 		}
 
 
