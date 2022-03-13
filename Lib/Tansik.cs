@@ -80,9 +80,13 @@ namespace MedicalTansik.Lib
 			
 			if (desire.IsAcademic == true)
 			{
-				if (grad == "جيد جدا")
+				if (Convert.ToInt32(student.GradeYear) != 2)
 				{
-					return true;
+					if (grad == "جيد جدا")
+					{
+						return true;
+					}
+					else return false;
 				}
 				else return false;
 			}
