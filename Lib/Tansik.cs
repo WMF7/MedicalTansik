@@ -94,7 +94,7 @@ namespace MedicalTansik.Lib
 				else return false;
 			}
 
-			return true;
+			
 		}
 
 		public void TryExclude(Desire desire, Student excluderStudent) {
