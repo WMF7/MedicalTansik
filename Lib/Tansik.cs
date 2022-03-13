@@ -77,6 +77,7 @@ namespace MedicalTansik.Lib
 		{
 			//FIXME
 			string grad = db.gradeStudentsInMedicalSubjects.Include("MedicalSubject").Include("Student").Where(a => a.Med.Id == desire.MedicalSubject.Id).FirstOrDefault().grade;
+			
 			if (desire.IsAcademic == true)
 			{
 				if (grad == "جيد جدا")
@@ -121,7 +122,7 @@ namespace MedicalTansik.Lib
 								{
 									ReplaceStudents(desire, existingStudent, excluderStudent);
 								}
-								else
+								else if (Convert.ToInt32(existingStudent.BirthMonth) == Convert.ToInt32(excluderStudent.GradeYear))
 								{
 									if (Convert.ToInt32(existingStudent.BirthDay) < Convert.ToInt32(excluderStudent.BirthDay))
 									{
