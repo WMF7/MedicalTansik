@@ -103,6 +103,37 @@ namespace MedicalTansik.Lib
 				{
 					ReplaceStudents(desire, existingStudent, excluderStudent);
 				}
+				else if (Convert.ToInt32(GetGradOfexistingStudent) == Convert.ToInt32(GetGradOfexcluderStudent))
+					{//existingstudent is oldest graduated
+						if (Convert.ToInt32(existingStudent.GradeYear) < Convert.ToInt32(excluderStudent.GradeYear))
+						{
+							ReplaceStudents(desire, existingStudent, excluderStudent);
+						}
+						else if (Convert.ToInt32(existingStudent.GradeYear) == Convert.ToInt32(excluderStudent.GradeYear))
+						{
+							if (Convert.ToInt32(existingStudent.BirthYear) > Convert.ToInt32(excluderStudent.GradeYear))
+							{
+								ReplaceStudents(desire, existingStudent, excluderStudent);
+							}
+							else if (Convert.ToInt32(existingStudent.BirthYear) == Convert.ToInt32(excluderStudent.GradeYear))
+                             {
+								if (Convert.ToInt32(existingStudent.BirthMonth) < Convert.ToInt32(excluderStudent.GradeYear))
+								{
+									ReplaceStudents(desire, existingStudent, excluderStudent);
+								}
+								else
+								{
+									if (Convert.ToInt32(existingStudent.BirthDay) < Convert.ToInt32(excluderStudent.BirthDay))
+									{
+										ReplaceStudents(desire, existingStudent, excluderStudent);
+									}
+									
+								}
+							}
+						}
+
+					}
+				
 			}
 		}
 
