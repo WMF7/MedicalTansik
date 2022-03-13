@@ -76,6 +76,24 @@ namespace MedicalTansik.Lib
 		private bool StudentEligibleForDesire(Student student, Desire desire)
 		{
 			//FIXME
+			string grad = db.gradeStudentsInMedicalSubjects.Include("MedicalSubject").Include("Student").Where(a => a.Med.Id == studentDesire.Desire.MedicalSubject.Id).FirstOrDefault().grade;
+			if (desire.IsAcademic == true)
+			{
+				if (grad == "جيد جدا")
+				{
+					return true;
+				}
+				else return false;
+			}
+			else //not Academic
+			{
+				if (grad == "جيد")
+				{
+					return true;
+				}
+				else return false;
+			}
+
 			return true;
 		}
 
