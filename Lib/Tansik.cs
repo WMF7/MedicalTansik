@@ -75,72 +75,80 @@ namespace MedicalTansik.Lib
 
 		private bool StudentEligibleForDesire(Student student, Desire desire)
 		{
-			//FIXME
-			string grad = db.gradeStudentsInMedicalSubjects.Include("MedicalSubject").Include("Student").Where(a => a.Med.Id == desire.MedicalSubject.Id).FirstOrDefault().grade;
-			
-			if (desire.IsAcademic == true)
-			{
-				if (Convert.ToInt32(student.GradeYear) != 2)
-				{
-					if (grad == "جيد جدا")
-					{
-						return true;
-					}
-					else return false;
-				}
-				else return false;
-			}
-			else //not Academic
-			{
-				if (grad == "جيد")
-				{
-					return true;
-				}
-				else return false;
-			}
 
-			
+			//ApplicationDbContext db = new ApplicationDbContext();
+			//string grad = db.Include("MedicalSubject").Include("Student").Where(a => a.Med.Id == desire.MedicalSubject.Id).FirstOrDefault().grade;
+
+			//if (desire.IsAcademic == true)
+			//{
+			//	if (Convert.ToInt32(student.GradeYear) != 2)
+			//	{
+			//		if (grad == "جيد جدا")
+			//		{
+			//			return true;
+			//		}
+			//		else return false;
+			//	}
+			//	else return false;
+			//}
+			//else //not Academic
+			//{
+			//	if (grad == "جيد")
+			//	{
+			//		return true;
+			//	}
+			//	else return false;
+			//}
+
+			return true;
 		}
 
 		public void TryExclude(Desire desire, Student excluderStudent) {
-			foreach (Student existingStudent in new List<Student>(this.Result[desire.Name])) {
-				if(Convert.ToInt32(excluderStudent.Total) > Convert.ToInt32(existingStudent.Total))
+
+			foreach (Student existingStudent in new List<Student>(this.Result[desire.Name]))
+			{
+				if (Convert.ToInt32(excluderStudent.Total) > Convert.ToInt32(existingStudent.Total))
 				{
 					ReplaceStudents(desire, existingStudent, excluderStudent);
 				}
-				else if (Convert.ToInt32(GetGradOfexistingStudent) == Convert.ToInt32(GetGradOfexcluderStudent))
-					{//existingstudent is oldest graduated
-						if (Convert.ToInt32(existingStudent.GradeYear) < Convert.ToInt32(excluderStudent.GradeYear))
-						{
-							ReplaceStudents(desire, existingStudent, excluderStudent);
-						}
-						else if (Convert.ToInt32(existingStudent.GradeYear) == Convert.ToInt32(excluderStudent.GradeYear))
-						{
-							if (Convert.ToInt32(existingStudent.BirthYear) > Convert.ToInt32(excluderStudent.GradeYear))
-							{
-								ReplaceStudents(desire, existingStudent, excluderStudent);
-							}
-							else if (Convert.ToInt32(existingStudent.BirthYear) == Convert.ToInt32(excluderStudent.GradeYear))
-                             {
-								if (Convert.ToInt32(existingStudent.BirthMonth) < Convert.ToInt32(excluderStudent.GradeYear))
-								{
-									ReplaceStudents(desire, existingStudent, excluderStudent);
-								}
-								else if (Convert.ToInt32(existingStudent.BirthMonth) == Convert.ToInt32(excluderStudent.GradeYear))
-								{
-									if (Convert.ToInt32(existingStudent.BirthDay) < Convert.ToInt32(excluderStudent.BirthDay))
-									{
-										ReplaceStudents(desire, existingStudent, excluderStudent);
-									}
-									
-								}
-							}
-						}
+			//	else if (Convert.ToInt32(GetGradOfexistingStudent) == Convert.ToInt32(GetGradOfexcluderStudent))
+			//		{//existingstudent is oldest graduated
+			//			if (Convert.ToInt32(existingStudent.GradeYear) < Convert.ToInt32(excluderStudent.GradeYear))
+			//			{
+			//				ReplaceStudents(desire, existingStudent, excluderStudent);
+			//			}
+			//			else if (Convert.ToInt32(existingStudent.GradeYear) == Convert.ToInt32(excluderStudent.GradeYear))
+			//			{
+			//				if (Convert.ToInt32(existingStudent.BirthYear) > Convert.ToInt32(excluderStudent.GradeYear))
+			//				{
+			//					ReplaceStudents(desire, existingStudent, excluderStudent);
+			//				}
+			//				else if (Convert.ToInt32(existingStudent.BirthYear) == Convert.ToInt32(excluderStudent.GradeYear))
+			//                          {
+			//					if (Convert.ToInt32(existingStudent.BirthMonth) < Convert.ToInt32(excluderStudent.GradeYear))
+			//					{
+			//						ReplaceStudents(desire, existingStudent, excluderStudent);
+			//					}
+			//					else if (Convert.ToInt32(existingStudent.BirthMonth) == Convert.ToInt32(excluderStudent.GradeYear))
+			//					{
+			//						if (Convert.ToInt32(existingStudent.BirthDay) < Convert.ToInt32(excluderStudent.BirthDay))
+			//						{
+			//							ReplaceStudents(desire, existingStudent, excluderStudent);
+			//						}
 
-					}
-				
+					//					}
+					//				}
+					//			}
+
+					//		}
+
+
+
 			}
-		}
+
+
+
+	}
 
 		private void ReplaceStudents(Desire desire, Student existingStudent, Student excluderStudent)
 		{

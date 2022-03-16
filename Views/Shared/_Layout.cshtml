@@ -4,16 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - النظام الالكتروني لتسجيل الرغبات  في كلية الطب </title>
- 
+    
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family="" Almarai:wght@700&display=swap" rel="stylesheet"> 
     @Styles.Render("~/Content/mdb/css/mdb.min.css")
     @Styles.Render("~/Content/main.css")
     @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scriptsTop", required: false)
+
 </head>
 <body dir="rtl">
 
 
-
+    
     <div class="container body-content" ondropover="allowDrop(event)">
         @RenderBody()
 
@@ -22,7 +27,6 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Content/mdb/js/mdb.min.js")
     @RenderSection("scripts", required: false)
 

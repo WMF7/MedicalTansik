@@ -9,6 +9,7 @@ using MedicalTansik.Models;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using MedicalTansik.Models.ViewModels;
 
 namespace MedicalTansik.Controllers
 {
@@ -88,13 +89,55 @@ namespace MedicalTansik.Controllers
 
 
 		[HttpPost]
-        public ActionResult SaveDesires()
+        public ActionResult SaveDesires(SaveDesiresAjax req)
         {
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            result.Add("name", "Walid Moustafa");
+			//The result that we return from this method "SaveDesires" to the AJAX call;
+			//it is a dictionary because it's convertable to JSON, both share the same concept of key-value storage.
+			Dictionary<string, string> result = new Dictionary<string, string>();
+			ApplicationDbContext db = new ApplicationDbContext();
+			Student student = DBUtils.GetLoggedInStudent(User.Identity.GetUserId());
+			/* 
+			 * NOTE(walid): this is a very important, we can't use the student object that we
+			 * obtained from the function "GetLoggedInStudent" directly as a property to create a new StudentDesire
+			 * object, that will simply recreate the student, student HAVE TO BE fetched from the same
+			 * dbContext.
+			*/
+			student = db.students.Find(student.Id); 
+			Announcment announcment = db.Announcments.Find(1);
+
+
+			if (TansikUtils.StudentDidDoTansik(DBUtils.GetLoggedInStudent(User.Identity.GetUserId())))
+			{
+				result.Add("status", "error");
+				result.Add("message", "took the tansik before");
+				return Json(result);
+			}
+
+			if (req.Action == "ADD_DESIRES")
+			{
+				if(req.Data.Length == 0)
+				{
+					result.Add("status", "error");
+					result.Add("message", "الرغبات مش موجودة");
+					return Json(result);
+				}
+
+				foreach (int i in req.Data)
+				{
+					Desire desire = db.Desires.Find(i);
+					db.StudentDesires.Add(new StudentDesire() { Announcment = announcment, Student = student, Desire = desire, rank = Array.IndexOf(req.Data, i) + 1 }); ;
+					db.SaveChanges();
+				}
+				result.Add("status", "success");
+				result.Add("message", "تم حفظ الرغبات بنجاح.");
+				return Json(result);
+			} 
+			
+            result.Add("status", "error");
             return Json(result);
         }
 
+		[AllowAnonymous]
         public string Test()
 		{
 			
@@ -105,17 +148,18 @@ namespace MedicalTansik.Controllers
 			Dictionary<String, List<Student>> results =tansik.GetResults();
 			foreach(KeyValuePair<String, List<Student>> entry in results)
 			{
-				resultString += entry.Key;
+				if (entry.Value.Count == 0) continue; //not printing the empty desires;
+				resultString += "<h1> " + entry.Key + "</h1>";
 				resultString += "<br>";
 				foreach(Student student in entry.Value)
 				{
 					resultString += student.Name;
-					resultString += "--";
+					resultString += "<br>";
 				}
 				resultString += "<br>";
 				resultString += "<br>";
-				resultString += "<br>";
-				resultString += "<br>";
+				resultString += "<hr>";
+			
 
 			}
 			return resultString;
