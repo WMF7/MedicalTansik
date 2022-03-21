@@ -1,0 +1,17 @@
+
+#loginForm {
+    margin: 50px auto;
+    width: 50%;
+}
+
+label {
+    margin-bottom: 5px;
+}
+input[type=submit] {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-top: 20px;
+}
+

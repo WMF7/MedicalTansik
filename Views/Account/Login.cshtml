@@ -2,51 +2,55 @@
 @model LoginViewModel
 
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "تسجيل الدخول";
 }
 
 @section styles {
-    <link href="/Content/login.css" rel="stylesheet"/>
-    }
+    <link href="/Content/login.css" rel="stylesheet" />
+}
 
-    
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
+@Html.Partial("_Navbar")
+
+    <div class="container">
+	<!-- <div class="row"> -->
+	<!-- <div class="col-md-6"> -->
+        <section id="loginForm" class="">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>تسجيل الدخول</h4>
-                <hr />
+
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.NationalId, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.NationalId, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.NationalId, new { @class = "control-label" })
+                    <div class="">
+                        @Html.TextBoxFor(m => m.NationalId, new { @class = "form-control p-2" })
                         @Html.ValidationMessageFor(m => m.NationalId, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                 
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                       
+
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    <div class="">
+
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                       
+
                     </div>
                 </div>
-             
+
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="تسجيل الدخول" class="btn btn-default" />
+                    <div class="">
+                        <input type="submit" value="تسجيل الدخول" class="btn btn-primary btn-rounded btn-block" />
                     </div>
                 </div>
-               
+
             }
         </section>
-    </div>
-   
-</div>
+	<!-- </div> <!-- col-md-6  -->
 
+
+	<!-- <div class="col-md-6">
+	     </div>
+	-->
+	<!-- </div> <!-- row  -->
+    </div>

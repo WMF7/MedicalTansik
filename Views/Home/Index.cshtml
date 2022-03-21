@@ -1,98 +1,76 @@
 ﻿@model MedicalTansik.Models.Student
 
+@{
+    ViewBag.Title = "صفحة  تنسيق الرغبات";
+}
 @section styles {
     <style>
+     body {
+	 background-color: lightyellow;
+     }
      .desires-wrapper {
 	 overflow: auto;
-	 height: 80vh;
+	 height: 50vh;
+	 /* margin:  auto; */
      }
      .academic-desire {
 	 background-color: lightpink;
      }
 
+     .all-process-wrapper {
+	 margin: 50px auto;
+	 margin-bottom: 20px;
+     }
+
+     .card{
+	 margin: 0px auto;
+     }
     </style>
     }
     
-    <!-- Tabs navs -->
-    <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
-	<li class="nav-item" role="presentation">
-            <a class="nav-link active"
-               id="ex1-tab-1"
-               data-mdb-toggle="tab"
-               href="#ex1-tabs-1"
-               role="tab"
-               aria-controls="ex1-tabs-1"
-               aria-selected="true">Tab 1</a>
-	</li>
-	<li class="nav-item" role="presentation">
-            <a class="nav-link"
-               id="ex1-tab-2"
-               data-mdb-toggle="tab"
-               href="#ex1-tabs-2"
-               role="tab"
-               aria-controls="ex1-tabs-2"
-               aria-selected="false">Tab 2</a>
-	</li>
-	<li class="nav-item" role="presentation">
-            <a class="nav-link"
-               id="ex1-tab-3"
-               data-mdb-toggle="tab"
-               href="#ex1-tabs-3"
-               role="tab"
-               aria-controls="ex1-tabs-3"
-               aria-selected="false">Tab 3</a>
-	</li>
-    </ul>
-    <!-- Tabs navs -->
+
+    @Html.Partial("_Navbar_Home")
 
 
 
-
-    <!-- Tabs content -->
-    <div class="tab-content" id="ex1-content">
-	<div class="tab-pane fade show active"
-             id="ex1-tabs-1"
-             role="tabpanel"
-             aria-labelledby="ex1-tab-1">
-
-	    <div class="row">
-		<div id="desires-container"  class="col-sm-6 desires-wrapper">
-
-		    @foreach(var desire in ViewBag.Desires)
-		    {
-		    <div  class='card desire @(desire.IsAcademic? "academic-desire" : "clinical-desire") my-4 '
-			  style="cursor: move"
-			  data-id="@(desire.Id)"
-		    > 
-			<div class="card-body">
-			    <div>
-				@desire.Name - @(desire.IsAcademic? "أكاديمي" : "إكلينيكي")
-			    </div>
-			</div>
-		    </div>
-		    }
-		</div>
-
-		<div class="col-sm-6 ">
-		    <div class="py-4 px-4 desires-wrapper" id="student-desires-container">
-			
-		    </div>
-		</div>
+    <div class="row fluid-container all-process-wrapper">
+	<div  class="col-sm-5 offset-sm-1  card p-0">
+	    <div class="card-header bg-primary text-light ">
+		الرغبات المتاحة
 	    </div>
 
+	    <div id="desires-container"  class="card-body desires-wrapper">
+		@foreach(var desire in ViewBag.Desires)
+		{
+		<button onclick="event.preventDefault();" class='btn-success btn-block desire @(desire.IsAcademic? "btn-danger" : "clinical-desire") my-4 '
+			style="cursor: move; width: 70%; margin: 0 auto"
+		    data-id="@(desire.Id)">
+		    <div class="d-inline">
+			<div>
+			    @desire.Name - @(desire.IsAcademic? "أكاديمي" : "إكلينيكي")
+			</div>
+		    </div>
+		</button>
+		}
+	    </div>
 	</div>
 
+	<div  class="col-sm-5 offset-sm-1 card p-0 ">
+	    <div class="card-header bg-primary text-light">
+		الرغبات المُختارة
+	    </div>
+	    <div id="student-desires-container" class="card-body desires-wrapper">
+		
+		
+	    </div>
+	    <div> <button class="btn btn-primary  save m-2">حفظ</button></div>
+
+	</div>
 	
-	<div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-            Tab 2 content
-	</div>
-	<div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-            Tab 3 content
-	</div>
+
     </div>
 
 
-    <div> <button class="btn btn-primary save">حفظ</button></div>
 
     <!-- Tabs content -->
 
@@ -105,8 +83,8 @@
 	var element = $("#desires-container")[0];
 	new Sortable(element, {
             group: 'shared',
-            animation: 150
-	    
+	    sort: false,
+            animation: 150,
 	});
 	var element2 = $("#student-desires-container")[0];
 	
@@ -117,6 +95,7 @@
 	</script>
 
 	<script>
+	
 	$(".save").on("click", function() {
 	    var desiresElement = $("#student-desires-container").find(".desire");
 	    var desires = [];
@@ -132,6 +111,7 @@
 		success: function(data) {
 		    if(data.status == "success")  {
 			alert("تم حفظ الرغبات بنجاح");
+			window.location.reload();
 		    } else if (data.status == "error"){
 			alert("something wrong happened");
 		    }

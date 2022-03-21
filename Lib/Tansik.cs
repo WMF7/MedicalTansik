@@ -76,31 +76,31 @@ namespace MedicalTansik.Lib
 		private bool StudentEligibleForDesire(Student student, Desire desire)
 		{
 
-			//ApplicationDbContext db = new ApplicationDbContext();
-			//string grad = db.Include("MedicalSubject").Include("Student").Where(a => a.Med.Id == desire.MedicalSubject.Id).FirstOrDefault().grade;
+			ApplicationDbContext db = new ApplicationDbContext();
+			string grad = db.StudentSubjectDegrees.Include("MedicalSubject")
+				.Include("Student").Where(a => a.MedicalSubject.Id == desire.MedicalSubject.Id).FirstOrDefault().Takdeer;
 
-			//if (desire.IsAcademic == true)
-			//{
-			//	if (Convert.ToInt32(student.GradeYear) != 2)
-			//	{
-			//		if (grad == "جيد جدا")
-			//		{
-			//			return true;
-			//		}
-			//		else return false;
-			//	}
-			//	else return false;
-			//}
-			//else //not Academic
-			//{
-			//	if (grad == "جيد")
-			//	{
-			//		return true;
-			//	}
-			//	else return false;
-			//}
+			if (desire.IsAcademic == true)
+			{
+				if (Convert.ToInt32(student.GradeYear) != 2)
+				{
+					if (grad == "جيد جدا")
+					{
+						return true;
+					}
+					else return false;
+				}
+				else return false;
+			}
+			else //not Academic
+			{
+				if (grad == "جيد")
+				{
+					return true;
+				}
+				else return false;
+			}
 
-			return true;
 		}
 
 		public void TryExclude(Desire desire, Student excluderStudent) {

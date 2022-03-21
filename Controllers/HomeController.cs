@@ -137,13 +137,22 @@ namespace MedicalTansik.Controllers
             return Json(result);
         }
 
+
+		public ActionResult Info() {
+
+			return View();
+		}
+
+
+
+
 		[AllowAnonymous]
         public string Test()
 		{
 			
 			ApplicationDbContext db = new ApplicationDbContext();
 			String resultString = "";
-			Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Student").ToList());
+			Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Desire.MedicalSubject").Include("Student").ToList());
 			tansik.DoIt();
 			Dictionary<String, List<Student>> results =tansik.GetResults();
 			foreach(KeyValuePair<String, List<Student>> entry in results)
