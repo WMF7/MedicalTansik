@@ -1,29 +1,79 @@
-﻿@{
+@{
     ViewBag.Title = "تأكيد بيانات الطالب";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ConfirmStudentData</h2>
+@section styles {
+    <style>
+        body {
+            background-color: lightyellow;
+        }
+
+        .card {
+            margin: 0px auto;
+
+        }
+        .confirmbtn {
+            padding: 10px 55px;
+        }
+        table p {
+        font-size:20px;
+        font-weight:bold;
+        }
+        .divbtn {
+            text-align: center;
+        }
+    </style>
+}
 
 
 
 
-<div class="jumbotron">
-    <h2 style="text-align:Center">
-        الرجاء مراجعة بياناتك وقم بالتاكد من صحتها واذا تبين وجود خطأ في البيانات تواصل مع شئون الطلبة فورا
-    </h2>
+<div class="card">
+    <div class="jumbotron">
+        <h2 style="text-align:Center">
+            الرجاء مراجعة بياناتك وقم بالتاكد من صحتها واذا تبين وجود خطأ في البيانات تواصل مع شئون الاطباء فورا
+        </h2>
 
-</div>
-
-
-
-
-<div class="row">
-    <div>
-        هنا إن شاء الله هنعرضله بياناته بالشكل اللي احنا عايزينه
     </div>
 
-    @using (Html.BeginForm("ConfirmStudentDataPost", "Home", FormMethod.Post, null))
-    {
-        <button>تأكيد</button>
-    }
+    <br/>
+
+
+    <div class="row">
+
+        <table class="table">
+            <tr>
+                <td><p>الاسم</p></td>
+                <td>@ViewBag.Student.Name</td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td><p>رقم التليفون</p></td>
+                <td>@ViewBag.Student.PhoneNumber</td>
+                <td><p>العنوان</p></td>
+                <td>@ViewBag.Student.Address</td>
+            </tr>
+            <tr>
+                <td><p>المجموع التراكمي</p></td>
+                <td>
+                    @ViewBag.Student.Total
+                </td>
+                <td><p>الترتيب علي الدفعة</p></td>
+                <td>
+                    الحادي والعشرون
+                </td>
+            </tr>
+
+        </table>
+
+
+        @using (Html.BeginForm("ConfirmStudentDataPost", "Home", FormMethod.Post, null))
+        {
+            <div class="divbtn"> <button class="btn btn-primary  confirmbtn m-2">تأكيد</button></div>
+        }
+    </div>
 </div>
