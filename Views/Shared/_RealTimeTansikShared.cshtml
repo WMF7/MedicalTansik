@@ -1,0 +1,38 @@
+﻿
+@using MedicalTansik.Models;
+
+<div class="container">
+    <div class="table-wrapper my-4" style="overflow: auto; height: 80vh;">
+        <table class="table table-bordered align-middle mb-0 pb-4 bg-white">
+            <thead class="bg-light">
+                <tr>
+                    <td>القسم</td>
+                    <td>المقبولين</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (KeyValuePair<String, List<Student>> entry in ViewBag.results)
+                {
+                    if (entry.Value.Count != 0)
+                    {
+                        <tr>
+                            <td>
+                                @entry.Key
+                            </td>
+                            <td>
+                                @foreach (Student student in entry.Value)
+                                {
+                                    <ul>
+                                        <li>@student.Name</li>
+                                    </ul>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

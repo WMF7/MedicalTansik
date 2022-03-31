@@ -28,7 +28,7 @@ namespace MedicalTansik.Controllers
 			
             if (TansikUtils.StudentDidDoTansik(DBUtils.GetLoggedInStudent(User.Identity.GetUserId())))
             {
-                return Content("<h1> this student alread did tansik, one day, and that day may never come, we will have a nice good looking page to tell the student that.</h1>");
+				return View("PrintTansikInfo");
             }
             List<Desire> desires = this.db.Desires.ToList();
 			ViewBag.Desires = desires;
@@ -49,6 +49,16 @@ namespace MedicalTansik.Controllers
 			return View();
 		}
 
+		
+		public ActionResult RealTimeTansik()
+		{
+			ApplicationDbContext db = new ApplicationDbContext();
+			Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Desire.MedicalSubject").Include("Student").ToList());
+			tansik.DoIt();
+			Dictionary<String, List<Student>> results =tansik.GetResults();
+			ViewBag.results = results;
+			return View();
+		}
 
 		[HttpGet]
 		public ActionResult ConfirmStudentData()
