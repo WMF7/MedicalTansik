@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,22 +10,27 @@ using Microsoft.AspNet.Identity;
 
 namespace MedicalTansik.Controllers
 {
+    public class viewmodel
+    {
+        public IEnumerable<Student> stu { get; set; }
+        public IEnumerable<StudentDesire> std { get; set; }
+    }
     public class DashboardController : Controller
     {
         // GET: Dashboard
+        public ApplicationDbContext db = new ApplicationDbContext();
         [Authorize]
         public ActionResult Index()
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                //Tansik t = new Tansik();
-                //DBUtils s = new DBUtils();
-                //List<InstantResult> re = new List<InstantResult>();
-                //List<StudentDesire> r = db.StudentDesires.ToList();
-                //re = t.DoIt(r);
-                //return View(re);
-                return null;
-            }
+           
+                var sts = db.students.ToList();
+                ViewData["studesire"] = db.StudentDesires.ToList();
+                var sdlist= db.StudentDesires.Include("Desire").ToList().OrderBy(a=>a.rank);
+                dynamic m = new System.Dynamic.ExpandoObject();
+                m.stu = sts;
+                m.std = sdlist;
+                return View(m);
+           
         }
 
 
