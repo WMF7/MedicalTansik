@@ -11,69 +11,74 @@
 
         .card {
             margin: 0px auto;
-
         }
+
+        table {
+            margin: 30px auto;
+        }
+
         .confirmbtn {
             padding: 10px 55px;
         }
+
         table p {
-        font-size:20px;
-        font-weight:bold;
+            font-size: 15px;
+            font-weight: bold;
         }
+
         .divbtn {
             text-align: center;
         }
     </style>
 }
 
-
-
-
-<div class="card">
-    <div class="jumbotron">
+<div class="container">
+    <div class="card bg-danger p-4 text-light mb-5">
         <h2 style="text-align:Center">
-            الرجاء مراجعة بياناتك وقم بالتاكد من صحتها واذا تبين وجود خطأ في البيانات تواصل مع شئون الاطباء فورا
+            الرجاء مراجعة بياناتك  والتاكد من صحتها، وإذا تبين وجود خطأ في البيانات تواصل مع شئون الاطباء فورا.
         </h2>
 
     </div>
 
-    <br/>
+    <div class="card">
 
 
-    <div class="row">
-
-        <table class="table">
-            <tr>
-                <td><p>الاسم</p></td>
-                <td>@ViewBag.Student.Name</td>
-                <td>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td><p>رقم التليفون</p></td>
-                <td>@ViewBag.Student.PhoneNumber</td>
-                <td><p>العنوان</p></td>
-                <td>@ViewBag.Student.Address</td>
-            </tr>
-            <tr>
-                <td><p>المجموع التراكمي</p></td>
-                <td>
-                    @ViewBag.Student.Total
-                </td>
-                <td><p>الترتيب علي الدفعة</p></td>
-                <td>
-                    الحادي والعشرون
-                </td>
-            </tr>
-
-        </table>
+        <br />
 
 
-        @using (Html.BeginForm("ConfirmStudentDataPost", "Home", FormMethod.Post, null))
-        {
-            <div class="divbtn"> <button class="btn btn-primary  confirmbtn m-2">تأكيد</button></div>
-        }
+
+            <table class="table ">
+                <tr>
+                    <td><p>الاسم</p></td>
+                    <td colspan="4" style="text-align: center">@ViewBag.Student.Name</td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p>رقم التليفون</p></td>
+                    <td>@(ViewBag.Student.PhoneNumber != null? ViewBag.Student.PhoneNumber : "" )</td>
+                    <td><p>العنوان</p></td>
+                    <td>@ViewBag.Student.Address</td>
+                </tr>
+                <tr>
+                    <td><p>المجموع التراكمي</p></td>
+                    <td>
+                        @ViewBag.Student.Total
+                    </td>
+                    <td><p>الترتيب علي الدفعة</p></td>
+                    <td>
+                        الحادي والعشرون
+                    </td>
+                </tr>
+
+            </table>
+
+
+            @using (Html.BeginForm("ConfirmStudentDataPost", "Home", FormMethod.Post, null))
+            {
+                <div class="divbtn"> <button class="btn btn-primary  confirmbtn m-2">تأكيد</button></div>
+            }
     </div>
 </div>

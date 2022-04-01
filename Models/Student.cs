@@ -37,6 +37,7 @@ namespace MedicalTansik.Models
 		public string Percentage {set; get;}
 		//[Required]
 		public GradeYear GradeYear {set; get;}
+		public String Rank { set; get; }
 	}
 
 	

@@ -25,9 +25,14 @@ namespace MedicalTansik.Controllers
 			{
 				return RedirectToAction("ConfirmStudentData", "Home");
 			}
-			
-            if (TansikUtils.StudentDidDoTansik(DBUtils.GetLoggedInStudent(User.Identity.GetUserId())))
+			Student student = DBUtils.GetLoggedInStudent(User.Identity.GetUserId());
+
+			if (TansikUtils.StudentDidDoTansik(student))
             {
+				ApplicationDbContext db = new ApplicationDbContext();
+				List<StudentDesire> studentDesires = db.StudentDesires.Include("Desire").Include("Student").Where(sd => sd.Student.Id == student.Id).ToList();
+				ViewBag.Student = student;
+				ViewBag.StudentDesires = studentDesires;
 				return View("PrintTansikInfo");
             }
             List<Desire> desires = this.db.Desires.ToList();

@@ -194,6 +194,10 @@
     <Compile Include="Migrations\202203161011079_removed-degree.Designer.cs">
       <DependentUpon>202203161011079_removed-degree.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202204012317052_added_student_rank.cs" />
+    <Compile Include="Migrations\202204012317052_added_student_rank.Designer.cs">
+      <DependentUpon>202204012317052_added_student_rank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -323,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202203161011079_removed-degree.resx">
       <DependentUpon>202203161011079_removed-degree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204012317052_added_student_rank.resx">
+      <DependentUpon>202204012317052_added_student_rank.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

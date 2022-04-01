@@ -1,7 +1,66 @@
-﻿
-@{
-    ViewBag.Title = "PrintTansikInfo";
+﻿@section styles  {
+    <style>
+        @@media print {
+            button, nav {
+                visibility: hidden;
+            }
+        }
+        .table {
+            width: 90%;
+            margin: 20px auto;
+            table-layout: auto;
+            
+        }
+        .head {width: 100px;}
+    </style>
+
 }
 
-<h2>PrintTansikInfo</h2>
+
+
+@using MedicalTansik.Models;
+@{
+    ViewBag.Title = "طباعة رغبات الطالب";
+}
+
+@Html.Partial("_Navbar_home")
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td class="head">الاسم</td>
+            <td>@ViewBag.Student.Name</td>
+        </tr>
+        <tr>
+            <td class="head">المجموع</td>
+            <td>@ViewBag.Student.Total</td>
+        </tr>
+        <tr>
+            <td>الترتيب</td>
+            <td>الرابع عشر</td>
+        </tr>
+        <tr>
+            <td>الرغبات المختارة:</td>
+            <td>
+                <ul>
+                    @foreach(StudentDesire sd in ViewBag.StudentDesires)
+			            {
+                            <li>@sd.rank -   @sd.Desire.Name  @(sd.Desire.IsAcademic? " - أكاديمي" : " - إكلينيكي")</li>
+		            	}
+                </ul>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+<button class="btn btn-primary">طباعة</button>
+
+@section scripts  {
+    <script>
+        $("button").on("click", function () {
+            window.print();
+        });
+    </script>
+
+}
+
 

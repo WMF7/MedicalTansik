@@ -26,10 +26,13 @@
 
             <!-- Left links -->
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                <a class="btn btn-primary mx-1" href="/Home/Info">بياناتي</a>
+                <a class="btn btn-primary mx-1" href="/Home/Info">معلومات عامة</a>
                 <a class="btn btn-primary mx-1" href="/Home/RealTimeTansik">التنسيق اللحظي</a>
-		<button class="btn btn-danger mx-1">تسجيل الخروج</button>
-
+            @using (Html.BeginForm("Logoff", "Account", FormMethod.Post, null))
+            {
+                    @Html.AntiForgeryToken();      
+                  <button class="btn btn-danger mx-1">تسجيل الخروج</button>
+            }
             </ul>
             <!-- Left links -->
         </div>
