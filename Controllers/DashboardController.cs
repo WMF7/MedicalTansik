@@ -69,6 +69,15 @@ namespace MedicalTansik.Controllers
             }
         }
 
-
+        [AllowAnonymous]
+        public  ActionResult PublicRealTimeTansik()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Desire.MedicalSubject").Include("Student").ToList());
+            tansik.DoIt();
+            Dictionary<String, List<Student>> results = tansik.GetResults();
+            ViewBag.results = results;
+            return View("PublicRealTimeTansik"); 
+		}
     }
 }
