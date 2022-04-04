@@ -53,21 +53,23 @@ namespace MedicalTansik.Controllers
             return View();
         }
 
-        // POST: Dashboard/Create
+         // POST: Dashboard/delete
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Delete()
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                // TODO: delete all student desires 
+                db.StudentDesires.RemoveRange(db.StudentDesires.ToList());
+                db.SaveChanges();
+                return View();
             }
             catch
             {
                 return View();
             }
         }
+
 
         [AllowAnonymous]
         public  ActionResult PublicRealTimeTansik()
