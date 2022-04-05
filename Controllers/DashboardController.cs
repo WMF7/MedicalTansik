@@ -41,10 +41,15 @@ namespace MedicalTansik.Controllers
             return "Added";
         }
 
-        // GET: Dashboard/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult show(int id)
         {
-            return View();
+            var studentvar = db.StudentSubjectDegrees.Include("MedicalSubject").Where(a => a.Student.Id == id).ToList();
+            if (studentvar != null)
+            {
+                return View(studentvar);
+            }
+            else { return RedirectToAction("Index"); }
         }
 
         // GET: Dashboard/Create
@@ -53,21 +58,23 @@ namespace MedicalTansik.Controllers
             return View();
         }
 
-        // POST: Dashboard/Create
+         // POST: Dashboard/delete
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Delete()
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                // TODO: delete all student desires 
+                db.StudentDesires.RemoveRange(db.StudentDesires.ToList());
+                db.SaveChanges();
+                return View();
             }
             catch
             {
                 return View();
             }
         }
+
 
         [AllowAnonymous]
         public  ActionResult PublicRealTimeTansik()

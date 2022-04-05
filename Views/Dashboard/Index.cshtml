@@ -1,6 +1,6 @@
-﻿
-@using MedicalTansik.Models;   
- @model dynamic
+
+@using MedicalTansik.Models;
+@model dynamic
 
 @{ ViewBag.Title = "لوحة التحكم";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,15 +13,115 @@
         background-color: darkgoldenrod;
         border-radius: 3px;
     }
+
     #example_length label {
         display: inline-flex !important;
     }
+
     #example_length {
         margin-top: 20px;
     }
+    .modal-confirm {
+        color: #636363;
+        width: 325px;
+        font-size: 14px;
+    }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -15px;
+        }
+
+        .modal-confirm .form-control, .modal-confirm .btn {
+            min-height: 40px;
+            border-radius: 3px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .modal-confirm .icon-box {
+            color: #fff;
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: -70px;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            z-index: 9;
+            background: #1266F1;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+            .modal-confirm .icon-box i {
+                font-size: 58px;
+                position: relative;
+                top: 3px;
+            }
+
+        .modal-confirm.modal-dialog {
+            margin-top: 80px;
+        }
+
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #1266F1;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border: none;
+        }
+
+            .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+                background: #1266F1;
+                outline: none;
+            }
+    .blue {
+        background: #1266F1;
+        color: white;
+        padding: 10px 20px
+    }
+        .blue:hover {
+            background: #1266F1;
+            color: white;
+        }
 </style>
+@Html.Partial("_Navbar")
+
 
 <div class="container-fluid py-4" style="padding: 20px 0px;">
+    @using (Html.BeginForm("Delete", "Dashboard", FormMethod.Post))
+    {
+        <input type="submit" value="حذف رغبات الطلاب" class="btn btn-sm blue" onclick="promptalert()" />
+
+    }
     <h4 class="text-center text-uppercase"></h4>
 
     <table class="table table-striped table-bordered" id="example" style="width:100%">
@@ -29,7 +129,7 @@
             <tr>
                 <td>اسم الطالب</td>
                 <td>الترتيب</td>
-                <td>عرض الرغبات</td>
+               <td>عرض التقديرات</td>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +139,7 @@
                     <td>
                         @item.Name
                     </td>
-                    <td><span class="badge badge-primary badge-pill">@item.Total</span></td>
+                    <td><span class="badge badge-primary badge-pill">@item.rank</span></td>
 
                     <td>
                         <select class="ddlclass">
@@ -49,52 +149,103 @@
                                     if (i.Student.Id == item.Id)
                                     {
                                         flag = 1;
-                                    <option class="dropdown-item">@i.Desire.Name</option>
+                                        <option class="dropdown-item">@i.Desire.Name</option>
                                     }
                                 }
                                 if (flag == 0)
-                                { <option class="dropdown-item">لا يوجد رغبات</option>}
+                                {
+                                    <option class="dropdown-item">لا يوجد رغبات</option>
+                                }
                             }
                         </select>
-                       
+
 
 
                     </td>
-
+                    <td>@Html.ActionLink("الاطلاع علي التقديرات", "show", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+<!-- Modal HTML -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <h4 class="modal-title w-100">Awesome!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">تم بنجاح</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal">اغلاق</button>
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts{
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="popover"]').popover();
+            });
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+            $('#example').dataTable({
+                "language": {
+                    "search": "بحث",
+                    "loadingRecords": "..جاري التحميل",
+                    "emptyTable": "لا يوجد بيانات",
+                    "zeroRecords": "لا يوجد بيانات مشابهه",
+                    "info": "عرض _START_ الي _END_ من _TOTAL_ طالب",
+                    "infoEmpty": "عرض 0 الي 0 من 0 ادخالات",
+                    "lengthMenu": "عرض _MENU_ الصفوف",
+                    "paginate": {
+                        "first": "اول",
+                        "last": "اخر",
+                        "next": "التالي",
+                        "previous": "السابق"
+                    },
 
-@section Scripts{
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-        });
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-        $('#example').dataTable({
-            "language": {
-                "search": "بحث",
-                "loadingRecords": "..جاري التحميل",
-                "emptyTable": "لا يوجد بيانات",
-                "zeroRecords": "لا يوجد بيانات مشابهه",
-                "info": "عرض _START_ الي _END_ من _TOTAL_ طالب",
-                "infoEmpty": "عرض 0 الي 0 من 0 ادخالات",
-                "lengthMenu": "عرض _MENU_ الصفوف",
-                "paginate": {
-                    "first": "اول",
-                    "last": "اخر",
-                    "next": "التالي",
-                    "previous": "السابق"
-                },
-               
+                }
+            });
+            function promptalert() {
+
+                var promval = prompt('من فضلك ادخل كلمة المرور');
+
+                if (promval != null) {
+                    if (promval == "#PU") {
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("Delete")',
+                            contentType: "application/json; charset=utf-8",
+                            dataType: 'json',
+                            success: function () {
+                                $("#myModal").modal("show");
+                            }
+                            , faild: function () {
+                            }
+                        });
+
+
+                    }
+                    else { alert("ليس لديك صلاحية حذف الرغبات"); }
+                }
+
+                else {
+
+                    alert("من فضلك ادخل كلمة المرور حتي تتمكن من الحذف !!");
+
+                }
+
             }
-        });
-    </script>
-}
+        </script>
+
+    }

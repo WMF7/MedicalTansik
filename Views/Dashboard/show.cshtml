@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MedicalTansik.Models.StudentSubjectDegree>
+
+@{
+    ViewBag.Title = "عرض تقديرات الطالب";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("_Navbar")
+<div class="container-fluid py-4" style="padding: 20px 0px;">
+    <table class="table">
+        <tr>
+            <th>
+                اسم المادة
+            </th>
+            <th>
+                التقدير
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedicalSubject.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Takdeer)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+}
