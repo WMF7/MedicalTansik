@@ -38,10 +38,10 @@
 		الرغبات المتاحة
 	    </div>
 
-	    <div id="desires-container"  class="card-body desires-wrapper">
+	    <div id="desires-container"   class="card-body desires-wrapper">
 		@foreach(var desire in ViewBag.Desires)
 		{
-		<button onclick="event.preventDefault();" class='btn-success btn-block desire @(desire.IsAcademic? "btn-danger" : "clinical-desire") my-4 '
+		<button onclick="event.preventDefault();" class='btn-success   btn-block desire @(desire.IsAcademic? "btn-danger" : "clinical-desire") my-4 '
 			style="cursor: move; width: 70%; margin: 0 auto"
 		    data-id="@(desire.Id)">
 		    <div class="d-inline">
@@ -112,7 +112,8 @@
 			alert("تم حفظ الرغبات بنجاح");
 			window.location.reload();
 		    } else if (data.status == "error"){
-			alert("something wrong happened");
+			alert("خطأ");
+			alert(data["message"]);
 		    }
 		}
 	    });

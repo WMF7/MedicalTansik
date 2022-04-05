@@ -198,21 +198,22 @@ namespace MedicalTansik.Lib
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التوليد وامراض النسا" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الباطنة العامة" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "جراحة الانف والاذن والحنجرة" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "طب الاطفال" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الجراحة العامة" });
-
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "طب الاطفال" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفارماكولوجي" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفسيولوجيا الطبية" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الهستولوجي" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الصحة العامة" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفسيولوجيا الطبية-ثانية" });
+			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الفسيولوجيا الطبية-أولى" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الهستولوجي-ثانية" });
+			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الهستولوجي-أولى" });
+			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "طب المجتمع" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الميكروبيولوجي" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التشريح" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التشريح-ثانية" });
+			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التشريح-أولى" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الطفيليات" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الباثولوجيا" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الكيمياء الحيوية" });
+            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الكيمياء الحيوية-ثانية" });
+			context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الكيمياء الحيوية-أولى" });
             context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "الطب الشرعي والسموم" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "طب الأسرة" });
-            context.MedicalSubjects.AddOrUpdate(new MedicalSubject() { Name = "التعليم الطبي" });
 
             context.SaveChanges();
 

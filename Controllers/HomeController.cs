@@ -98,7 +98,6 @@ namespace MedicalTansik.Controllers
 				}
 
 			}
-
 			return RedirectToAction("Index", "Home");
 		}
 
@@ -140,6 +139,31 @@ namespace MedicalTansik.Controllers
 				foreach (int i in req.Data)
 				{
 					Desire desire = db.Desires.Find(i);
+                    db.Entry(desire).Reference("MedicalSubject").Load();
+					string takdeer = Tansik.ExtractTakdeerFromDesire(desire, student);
+					if (desire.IsAcademic)
+					{
+						if (takdeer != "جيد جدا" || takdeer != "ممتاز")
+						{
+							result.Add("status", "error");
+							result.Add("message", "انت غير مؤهل لاختيار هذه الرغبة");
+							return Json(result);
+						}
+					} else {
+						if (takdeer == "مقبول")
+						{
+							result.Add("status", "error");
+							result.Add("message", "انت غير مؤهل لاختيار هذه الرغبة");
+
+							return Json(result);
+						}
+					}
+
+                }
+
+				foreach (int i in req.Data)
+				{
+					Desire desire = db.Desires.Find(i);
 					db.StudentDesires.Add(new StudentDesire() { Announcment = announcment, Student = student, Desire = desire, rank = Array.IndexOf(req.Data, i) + 1 }); ;
 					db.SaveChanges();
 				}
@@ -161,34 +185,44 @@ namespace MedicalTansik.Controllers
 
 
 
+		//[AllowAnonymous]
+  //      public string Test()
+		//{
+			
+		//	ApplicationDbContext db = new ApplicationDbContext();
+		//	String resultString = "";
+		//	Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Desire.MedicalSubject").Include("Student").ToList());
+		//	tansik.DoIt();
+		//	Dictionary<String, List<Student>> results =tansik.GetResults();
+		//	foreach(KeyValuePair<String, List<Student>> entry in results)
+		//	{
+		//		if (entry.Value.Count == 0) continue; //not printing the empty desires;
+		//		resultString += "<h1> " + entry.Key + "</h1>";
+		//		resultString += "<br>";
+		//		foreach(Student student in entry.Value)
+		//		{
+		//			resultString += student.Name;
+		//			resultString += "<br>";
+		//		}
+		//		resultString += "<br>";
+		//		resultString += "<br>";
+		//		resultString += "<hr>";
+			
+
+		//	}
+		//	return resultString;
+		//}
+
 		[AllowAnonymous]
-        public string Test()
+		public string Test(int id)
 		{
-			
-			ApplicationDbContext db = new ApplicationDbContext();
-			String resultString = "";
-			Tansik tansik = new Tansik(db.StudentDesires.Include("Desire").Include("Desire.MedicalSubject").Include("Student").ToList());
-			tansik.DoIt();
-			Dictionary<String, List<Student>> results =tansik.GetResults();
-			foreach(KeyValuePair<String, List<Student>> entry in results)
-			{
-				if (entry.Value.Count == 0) continue; //not printing the empty desires;
-				resultString += "<h1> " + entry.Key + "</h1>";
-				resultString += "<br>";
-				foreach(Student student in entry.Value)
-				{
-					resultString += student.Name;
-					resultString += "<br>";
-				}
-				resultString += "<br>";
-				resultString += "<br>";
-				resultString += "<hr>";
-			
-
-			}
-			return resultString;
+            ApplicationDbContext db = new ApplicationDbContext();
+			Desire desire = db.Desires.Find(Convert.ToInt32(Request.QueryString.Get("desire"))) ;
+            db.Entry(desire).Reference(d => d.MedicalSubject).Load();
+            Student student = db.students.Find(id);
+            string result = Tansik.ExtractTakdeerFromDesire(desire, student);
+            return student.Name + " " + result;
 		}
-
 
 	}
 }
