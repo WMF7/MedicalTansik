@@ -83,12 +83,12 @@ namespace MedicalTansik.Lib
             string takdeer = Tansik.ExtractTakdeerFromDesire(desire, student);
             if (desire.IsAcademic)
             {
-                if (takdeer != "جيد جدا" || takdeer != "ممتاز")
+                if (!takdeer.Equals(  "جيد جدا") || !takdeer.Equals(  "ممتاز"))
                 {
                     return false;
                 }
             } else {
-                if (takdeer != "مقبول")
+                if (takdeer.Equals(  "مقبول"))
                 {
                     return true;
                 }
@@ -180,49 +180,50 @@ namespace MedicalTansik.Lib
                         .Takdeer.Trim();
 
                     //جيد
-                    if (year1 == "جيد" && year2 == "جيد")
+                    if (year1.Equals( "جيد") && year2.Equals( "جيد"))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "جيد" && year2 == "جيد جدا") || (year2 == "جيد" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "جيد") && year2.Equals( "جيد جدا")) || (year2.Equals( "جيد") && year1.Equals( "جيد جدا")) )
                     {
                         return "جيد";
                     }
-                    else if (year1 == "جيد" && year2 == "ممتاز" || year2 == "جيد" && year1 == "ممتاز")
+					else if ((year1.Equals( "جيد") && year2.Equals( "ممتاز")) || (year2.Equals( "جيد") && year1.Equals( "ممتاز")))
                     {
                         return "جيد جدا";
                     }
+					
 
                     //ممتاز
-                    else if (year1 == "ممتاز" && year2 == "ممتاز")
+                    else if (year1.Equals( "ممتاز") && year2.Equals( "ممتاز"))
                     {
                         return "ممتاز";
                     }
-                    else if ((year1 == "ممتاز" && year2 == "جيد جدا") || (year2 == "ممتاز" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "ممتاز") && year2.Equals( "جيد جدا")) || (year2.Equals( "ممتاز") && year1.Equals( "جيد جدا")))
                     {
                         return "جيد جدا";
                     }
 
                     //جيد جدا
-                    else if (year1 == "جيد جدا" && year2 == "جيد جدا")
+                    else if (year1.Equals("جيد جدا") && year2.Equals("جيد جدا"))
                     {
                         return "جيد جدا";
                     }
 
                     //مقبول
-                    else if (year1 == "مقبول" && year2 == "مقبول")
+                    else if (year1.Equals( "مقبول") && year2.Equals( "مقبول"))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد") || (year2 == "مقبول" && year1 == "جيد"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد")) || (year2.Equals( "مقبول") && year1.Equals( "جيد")))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد جدا") || (year2 == "مقبول" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد جدا")) || (year2.Equals( "مقبول") && year1.Equals("جيد جدا")))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "مقبول" && year2 == "ممتاز") || (year2 == "مقبول" && year1 == "ممتاز"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "ممتاز")) || (year2.Equals( "مقبول") && year1.Equals( "ممتاز")))
                     {
                         return "جيد";
                     }
@@ -231,58 +232,59 @@ namespace MedicalTansik.Lib
                 if (medicalSubject.Name.Contains("فسيولوجيا"))
                 {
                     String year1 = db.StudentSubjectDegrees
-                        .Where(ssd => ssd.MedicalSubject.Id == 7 && ssd.Student.Id == student.Id)
-                        .FirstOrDefault()
-                        .Takdeer.Trim();
-                    String year2 = db.StudentSubjectDegrees
                         .Where(ssd => ssd.MedicalSubject.Id == 8 && ssd.Student.Id == student.Id)
                         .FirstOrDefault()
                         .Takdeer.Trim();
+                    String year2 = db.StudentSubjectDegrees
+                        .Where(ssd => ssd.MedicalSubject.Id == 7 && ssd.Student.Id == student.Id)
+                        .FirstOrDefault()
+                        .Takdeer.Trim();
 
-                    //جيد
-                    if (year1 == "جيد" && year2 == "جيد")
+                                        //جيد
+                    if (year1.Equals( "جيد") && year2.Equals( "جيد"))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "جيد" && year2 == "جيد جدا") || (year2 == "جيد" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "جيد") && year2.Equals( "جيد جدا")) || (year2.Equals( "جيد") && year1.Equals( "جيد جدا")) )
                     {
                         return "جيد";
                     }
-                    else if (year1 == "جيد" && year2 == "ممتاز" || year2 == "جيد" && year1 == "ممتاز")
+					else if ((year1.Equals( "جيد") && year2.Equals( "ممتاز")) || (year2.Equals( "جيد") && year1.Equals( "ممتاز")))
                     {
                         return "جيد جدا";
                     }
+					
 
                     //ممتاز
-                    else if (year1 == "ممتاز" && year2 == "ممتاز")
+                    else if (year1.Equals( "ممتاز") && year2.Equals( "ممتاز"))
                     {
                         return "ممتاز";
                     }
-                    else if ((year1 == "ممتاز" && year2 == "جيد جدا") || (year2 == "ممتاز" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "ممتاز") && year2.Equals( "جيد جدا")) || (year2.Equals( "ممتاز") && year1.Equals( "جيد جدا")))
                     {
                         return "جيد جدا";
                     }
 
                     //جيد جدا
-                    else if (year1 == "جيد جدا" && year2 == "جيد جدا")
+                    else if (year1.Equals("جيد جدا") && year2.Equals("جيد جدا"))
                     {
                         return "جيد جدا";
                     }
 
                     //مقبول
-                    else if (year1 == "مقبول" && year2 == "مقبول")
+                    else if (year1.Equals( "مقبول") && year2.Equals( "مقبول"))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد") || (year2 == "مقبول" && year1 == "جيد"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد")) || (year2.Equals( "مقبول") && year1.Equals( "جيد")))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد جدا") || (year2 == "مقبول" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد جدا")) || (year2.Equals( "مقبول") && year1.Equals("جيد جدا")))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "مقبول" && year2 == "ممتاز") || (year2 == "مقبول" && year1 == "ممتاز"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "ممتاز")) || (year2.Equals( "مقبول") && year1.Equals( "ممتاز")))
                     {
                         return "جيد";
                     }
@@ -291,121 +293,125 @@ namespace MedicalTansik.Lib
                 if (medicalSubject.Name.Contains("تشريح"))
                 {
                     String year1 = db.StudentSubjectDegrees
-                        .Where(ssd => ssd.MedicalSubject.Id == 7 && ssd.Student.Id == student.Id)
+                        .Where(ssd => ssd.MedicalSubject.Id == 14 && ssd.Student.Id == student.Id)
                         .FirstOrDefault()
                         .Takdeer.Trim();
                     String year2 = db.StudentSubjectDegrees
-                        .Where(ssd => ssd.MedicalSubject.Id == 8 && ssd.Student.Id == student.Id)
+                        .Where(ssd => ssd.MedicalSubject.Id == 13 && ssd.Student.Id == student.Id)
                         .FirstOrDefault()
                         .Takdeer.Trim();
 
-                    //جيد
-                    if (year1 == "جيد" && year2 == "جيد")
+                                        //جيد
+                    if (year1.Equals( "جيد") && year2.Equals( "جيد"))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "جيد" && year2 == "جيد جدا") || (year2 == "جيد" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "جيد") && year2.Equals( "جيد جدا")) || (year2.Equals( "جيد") && year1.Equals( "جيد جدا")) )
                     {
                         return "جيد";
                     }
-                    else if (year1 == "جيد" && year2 == "ممتاز" || year2 == "جيد" && year1 == "ممتاز")
+					else if ((year1.Equals( "جيد") && year2.Equals( "ممتاز")) || (year2.Equals( "جيد") && year1.Equals( "ممتاز")))
                     {
                         return "جيد جدا";
                     }
+					
 
                     //ممتاز
-                    else if (year1 == "ممتاز" && year2 == "ممتاز")
+                    else if (year1.Equals( "ممتاز") && year2.Equals( "ممتاز"))
                     {
                         return "ممتاز";
                     }
-                    else if ((year1 == "ممتاز" && year2 == "جيد جدا") || (year2 == "ممتاز" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "ممتاز") && year2.Equals( "جيد جدا")) || (year2.Equals( "ممتاز") && year1.Equals( "جيد جدا")))
                     {
                         return "جيد جدا";
                     }
 
                     //جيد جدا
-                    else if (year1 == "جيد جدا" && year2 == "جيد جدا")
+                    else if (year1.Equals("جيد جدا") && year2.Equals("جيد جدا"))
                     {
                         return "جيد جدا";
                     }
 
                     //مقبول
-                    else if (year1 == "مقبول" && year2 == "مقبول")
+                    else if (year1.Equals( "مقبول") && year2.Equals( "مقبول"))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد") || (year2 == "مقبول" && year1 == "جيد"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد")) || (year2.Equals( "مقبول") && year1.Equals( "جيد")))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد جدا") || (year2 == "مقبول" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد جدا")) || (year2.Equals( "مقبول") && year1.Equals("جيد جدا")))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "مقبول" && year2 == "ممتاز") || (year2 == "مقبول" && year1 == "ممتاز"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "ممتاز")) || (year2.Equals( "مقبول") && year1.Equals( "ممتاز")))
                     {
                         return "جيد";
                     }
+
 
                 } // تشريح
                 if (medicalSubject.Name.Contains("الحيوية"))
                 {
                     String year1 = db.StudentSubjectDegrees
-                        .Where(ssd => ssd.MedicalSubject.Id == 7 && ssd.Student.Id == student.Id)
+                        .Where(ssd => ssd.MedicalSubject.Id == 18 && ssd.Student.Id == student.Id)
                         .FirstOrDefault()
                         .Takdeer.Trim();
                     String year2 = db.StudentSubjectDegrees
-                        .Where(ssd => ssd.MedicalSubject.Id == 8 && ssd.Student.Id == student.Id)
+                        .Where(ssd => ssd.MedicalSubject.Id == 17 && ssd.Student.Id == student.Id)
                         .FirstOrDefault()
                         .Takdeer.Trim();
 
-                    //جيد
-                    if (year1 == "جيد" && year2 == "جيد")
+                                        //جيد
+                    if (year1.Equals( "جيد") && year2.Equals( "جيد"))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "جيد" && year2 == "جيد جدا") || (year2 == "جيد" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "جيد") && year2.Equals( "جيد جدا")) || (year2.Equals( "جيد") && year1.Equals( "جيد جدا")) )
                     {
                         return "جيد";
                     }
-                    else if (year1 == "جيد" && year2 == "ممتاز" || year2 == "جيد" && year1 == "ممتاز")
+					else if ((year1.Equals( "جيد") && year2.Equals( "ممتاز")) || (year2.Equals( "جيد") && year1.Equals( "ممتاز")))
                     {
                         return "جيد جدا";
                     }
+					
 
                     //ممتاز
-                    else if (year1 == "ممتاز" && year2 == "ممتاز")
+                    else if (year1.Equals( "ممتاز") && year2.Equals( "ممتاز"))
                     {
                         return "ممتاز";
                     }
-                    else if ((year1 == "ممتاز" && year2 == "جيد جدا") || (year2 == "ممتاز" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "ممتاز") && year2.Equals( "جيد جدا")) || (year2.Equals( "ممتاز") && year1.Equals( "جيد جدا")))
                     {
                         return "جيد جدا";
                     }
 
                     //جيد جدا
-                    else if (year1 == "جيد جدا" && year2 == "جيد جدا")
+                    else if (year1.Equals("جيد جدا") && year2.Equals("جيد جدا"))
                     {
                         return "جيد جدا";
                     }
 
                     //مقبول
-                    else if (year1 == "مقبول" && year2 == "مقبول")
+                    else if (year1.Equals( "مقبول") && year2.Equals( "مقبول"))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد") || (year2 == "مقبول" && year1 == "جيد"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد")) || (year2.Equals( "مقبول") && year1.Equals( "جيد")))
                     {
                         return "مقبول";
                     }
-                    else if ((year1 == "مقبول" && year2 == "جيد جدا") || (year2 == "مقبول" && year1 == "جيد جدا"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "جيد جدا")) || (year2.Equals( "مقبول") && year1.Equals("جيد جدا")))
                     {
                         return "جيد";
                     }
-                    else if ((year1 == "مقبول" && year2 == "ممتاز") || (year2 == "مقبول" && year1 == "ممتاز"))
+                    else if ((year1.Equals( "مقبول") && year2.Equals( "ممتاز")) || (year2.Equals( "مقبول") && year1.Equals( "ممتاز")))
                     {
                         return "جيد";
                     }
+
 
                 } // كيميا حيوية
                 return null;

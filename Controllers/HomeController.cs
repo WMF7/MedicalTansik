@@ -143,14 +143,14 @@ namespace MedicalTansik.Controllers
 					string takdeer = Tansik.ExtractTakdeerFromDesire(desire, student);
 					if (desire.IsAcademic)
 					{
-						if (takdeer != "جيد جدا" || takdeer != "ممتاز")
+						if (!takdeer.Equals("جيد جدا") || !takdeer.Equals("ممتاز"))
 						{
 							result.Add("status", "error");
 							result.Add("message", "انت غير مؤهل لاختيار هذه الرغبة");
 							return Json(result);
 						}
 					} else {
-						if (takdeer == "مقبول")
+						if (takdeer.Equals("مقبول"))
 						{
 							result.Add("status", "error");
 							result.Add("message", "انت غير مؤهل لاختيار هذه الرغبة");
