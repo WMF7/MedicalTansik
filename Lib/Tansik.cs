@@ -63,8 +63,8 @@ namespace MedicalTansik.Lib
 					return true;
 				} else {
 					TryExclude(desire, student);
-                   
-				}
+                    
+                }
 			}
 			return false;
 		}
@@ -83,7 +83,7 @@ namespace MedicalTansik.Lib
             string takdeer = Tansik.ExtractTakdeerFromDesire(desire, student);
             if (desire.IsAcademic)
             {
-                if (!takdeer.Equals(  "جيد جدا") || !takdeer.Equals(  "ممتاز"))
+                if (!takdeer.Equals(  "جيد جدا") && !takdeer.Equals(  "ممتاز"))
                 {
                     return false;
                 }

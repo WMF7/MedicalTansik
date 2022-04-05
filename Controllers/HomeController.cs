@@ -140,10 +140,10 @@ namespace MedicalTansik.Controllers
 				{
 					Desire desire = db.Desires.Find(i);
                     db.Entry(desire).Reference("MedicalSubject").Load();
-					string takdeer = Tansik.ExtractTakdeerFromDesire(desire, student);
+					string takdeer = Tansik.ExtractTakdeerFromDesire(desire, student).Trim();
 					if (desire.IsAcademic)
 					{
-						if (!takdeer.Equals("جيد جدا") || !takdeer.Equals("ممتاز"))
+						if (!takdeer.Equals("جيد جدا") && !takdeer.Equals("ممتاز"))
 						{
 							result.Add("status", "error");
 							result.Add("message", "انت غير مؤهل لاختيار هذه الرغبة");
