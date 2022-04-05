@@ -63,6 +63,7 @@ namespace MedicalTansik.Lib
 					return true;
 				} else {
 					TryExclude(desire, student);
+                   
 				}
 			}
 			return false;
@@ -100,18 +101,20 @@ namespace MedicalTansik.Lib
 
 			foreach (Student existingStudent in new List<Student>(this.Result[desire.Name]))
 			{
-				if (Convert.ToInt32(excluderStudent.Total) > Convert.ToInt32(existingStudent.Total))
+				if (Convert.ToDouble(excluderStudent.Total) > Convert.ToDouble(existingStudent.Total))
 				{
 					ReplaceStudents(desire, existingStudent, excluderStudent);
-                } else if (Convert.ToInt32(excluderStudent.Total) == Convert.ToInt32(existingStudent.Total))
+                    return;
+                } else if (Convert.ToDouble(excluderStudent.Total) == Convert.ToDouble(existingStudent.Total))
                 {
                     if(this.DoesHaveGreaterDegreeInSubject(excluderStudent, existingStudent, desire)) {
 						ReplaceStudents(desire, existingStudent, excluderStudent);
-						
+                        return;
                     }
                 } else if(Convert.ToInt32(excluderStudent.GradeYear) > Convert.ToInt32(existingStudent.GradeYear))
                 {
 					ReplaceStudents(desire, existingStudent, excluderStudent);
+                    return;
                 }
             }
 		}
@@ -131,7 +134,7 @@ namespace MedicalTansik.Lib
 			//TODO: this is trash, find a way to optmize database access;
 			ApplicationDbContext db = new ApplicationDbContext();
 			List<Desire> desires = new List<Desire>();
-			List<StudentDesire> studentDesires = db.StudentDesires.Include("Desire"). Where(sd => sd.Student.Id == student.Id ).ToList();
+            List<StudentDesire> studentDesires = db.StudentDesires.Include("Desire").Include("Desire.MedicalSubject"). Where(sd => sd.Student.Id == student.Id ).ToList();
 			foreach (StudentDesire studentDesire in studentDesires)
 			{
 				if(!desires.Contains(studentDesire.Desire))
