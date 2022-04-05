@@ -41,10 +41,15 @@ namespace MedicalTansik.Controllers
             return "Added";
         }
 
-        // GET: Dashboard/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult show(int id)
         {
-            return View();
+            var studentvar = db.StudentSubjectDegrees.Include("MedicalSubject").Where(a => a.Student.Id == id).ToList();
+            if (studentvar != null)
+            {
+                return View(studentvar);
+            }
+            else { return RedirectToAction("Index"); }
         }
 
         // GET: Dashboard/Create
