@@ -129,7 +129,7 @@
             <tr>
                 <td>اسم الطالب</td>
                 <td>الترتيب</td>
-                <td>عرض الرغبات</td>
+               <td>عرض التقديرات</td>
             </tr>
         </thead>
         <tbody>
@@ -162,7 +162,7 @@
 
 
                     </td>
-
+                    <td>@Html.ActionLink("الاطلاع علي التقديرات", "show", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
                 </tr>
             }
         </tbody>
