@@ -7,111 +7,114 @@
 
 }
 <style>
-    .ddlclass {
-        padding: 2px 10px;
-        border: 0px;
-        background-color: darkgoldenrod;
-        border-radius: 3px;
-    }
+ .ddlclass {
+     padding: 2px 10px;
+     border: 0px;
+     background-color: darkgoldenrod;
+     border-radius: 3px;
+ }
 
-    #example_length label {
-        display: inline-flex !important;
-    }
+ #example_length label {
+     display: inline-flex !important;
+ }
 
-    #example_length {
-        margin-top: 20px;
-    }
-    .modal-confirm {
-        color: #636363;
-        width: 325px;
-        font-size: 14px;
-    }
+ #example_length {
+     margin-top: 20px;
+ }
+ .modal-confirm {
+     color: #636363;
+     width: 325px;
+     font-size: 14px;
+ }
 
-        .modal-confirm .modal-content {
-            padding: 20px;
-            border-radius: 5px;
-            border: none;
-        }
+ .modal-confirm .modal-content {
+     padding: 20px;
+     border-radius: 5px;
+     border: none;
+ }
 
-        .modal-confirm .modal-header {
-            border-bottom: none;
-            position: relative;
-        }
+ .modal-confirm .modal-header {
+     border-bottom: none;
+     position: relative;
+ }
 
-        .modal-confirm h4 {
-            text-align: center;
-            font-size: 26px;
-            margin: 30px 0 -15px;
-        }
+ .modal-confirm h4 {
+     text-align: center;
+     font-size: 26px;
+     margin: 30px 0 -15px;
+ }
 
-        .modal-confirm .form-control, .modal-confirm .btn {
-            min-height: 40px;
-            border-radius: 3px;
-        }
+ .modal-confirm .form-control, .modal-confirm .btn {
+     min-height: 40px;
+     border-radius: 3px;
+ }
 
-        .modal-confirm .close {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-        }
+ .modal-confirm .close {
+     position: absolute;
+     top: -5px;
+     right: -5px;
+ }
 
-        .modal-confirm .modal-footer {
-            border: none;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 13px;
-        }
+ .modal-confirm .modal-footer {
+     border: none;
+     text-align: center;
+     border-radius: 5px;
+     font-size: 13px;
+ }
 
-        .modal-confirm .icon-box {
-            color: #fff;
-            position: absolute;
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-            top: -70px;
-            width: 95px;
-            height: 95px;
-            border-radius: 50%;
-            z-index: 9;
-            background: #1266F1;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-        }
+ .modal-confirm .icon-box {
+     color: #fff;
+     position: absolute;
+     margin: 0 auto;
+     left: 0;
+     right: 0;
+     top: -70px;
+     width: 95px;
+     height: 95px;
+     border-radius: 50%;
+     z-index: 9;
+     background: #1266F1;
+     padding: 15px;
+     text-align: center;
+     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+ }
 
-            .modal-confirm .icon-box i {
-                font-size: 58px;
-                position: relative;
-                top: 3px;
-            }
+ .modal-confirm .icon-box i {
+     font-size: 58px;
+     position: relative;
+     top: 3px;
+ }
 
-        .modal-confirm.modal-dialog {
-            margin-top: 80px;
-        }
+ .modal-confirm.modal-dialog {
+     margin-top: 80px;
+ }
 
-        .modal-confirm .btn {
-            color: #fff;
-            border-radius: 4px;
-            background: #1266F1;
-            text-decoration: none;
-            transition: all 0.4s;
-            line-height: normal;
-            border: none;
-        }
+ .modal-confirm .btn {
+     color: #fff;
+     border-radius: 4px;
+     background: #1266F1;
+     text-decoration: none;
+     transition: all 0.4s;
+     line-height: normal;
+     border: none;
+ }
 
-            .modal-confirm .btn:hover, .modal-confirm .btn:focus {
-                background: #1266F1;
-                outline: none;
-            }
-    .blue {
-        background: #1266F1;
-        color: white;
-        padding: 10px 20px
-    }
-        .blue:hover {
-            background: #1266F1;
-            color: white;
-        }
+ .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+     background: #1266F1;
+     outline: none;
+ }
+ .blue {
+     background: #1266F1;
+     color: white;
+     padding: 10px 20px
+ }
+ .blue:hover {
+     background: #1266F1;
+     color: white;
+ }
+
+ footer {display: none;}
+
 </style>
 @Html.Partial("_Navbar")
 
@@ -124,12 +127,13 @@
     }
     <h4 class="text-center text-uppercase"></h4>
 
-    <table class="table table-striped table-bordered" id="example" style="width:100%">
+    <table class="table table-striped table-bordered  " id="example" style="width:100%">
         <thead class="bg-dark text-white">
             <tr>
                 <td>اسم الطالب</td>
                 <td>الترتيب</td>
-               <td>عرض التقديرات</td>
+		<td>الرغبات</td>
+		<td>التقديرات</td>
             </tr>
         </thead>
         <tbody>
@@ -139,7 +143,7 @@
                     <td>
                         @item.Name
                     </td>
-                    <td><span class="badge badge-primary badge-pill">@item.rank</span></td>
+                    <td><span class="badge badge-primary badge-pill">@item.Rank</span></td>
 
                     <td>
                         <select class="ddlclass">
@@ -187,8 +191,11 @@
         </div>
     </div>
 </div>
-    @section Scripts{
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+@Scripts.Render("~/bundles/jquery")
+
+@section Scripts{
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
         <script>
