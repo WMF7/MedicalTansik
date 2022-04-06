@@ -22,7 +22,10 @@ namespace MedicalTansik.Controllers
         [Authorize]
         public ActionResult Index()
         {
-           
+           if (DBUtils.GetLoggedInUser(User.Identity.GetUserId()).IsStudent)
+            {
+                return RedirectToAction("Login", "Account");
+            }
                 var sts = db.students.ToList();
                 ViewData["studesire"] = db.StudentDesires.ToList();
                 var sdlist= db.StudentDesires.Include("Desire").ToList().OrderBy(a=>a.rank);
