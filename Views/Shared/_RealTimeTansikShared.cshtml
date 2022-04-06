@@ -17,17 +17,17 @@
                     if (entry.Value.Count != 0)
                     {
                         <tr>
-                            <td>
-                                @entry.Key
-                            </td>
-                            <td>
-                                @foreach (Student student in entry.Value)
-                                {
-                                    <ul>
-                                        <li>@student.Name</li>
-                                    </ul>
-                                }
-                            </td>
+                        <td>
+                        @entry.Key 
+                        </td>
+                        <td>
+                        @foreach (Student student in entry.Value)
+                        {
+                            <ul>
+                            <li>@student.Name</li>
+                            </ul>
+                        }
+                        </td>
                         </tr>
                     }
                 }
