@@ -62,8 +62,7 @@ namespace MedicalTansik.Lib
 					this.Result[desire.Name].Add(student);
 					return true;
 				} else {
-					TryExclude(desire, student);
-                    
+                    return TryExclude(desire, student);
                 }
 			}
 			return false;
@@ -97,26 +96,27 @@ namespace MedicalTansik.Lib
             return true;
         }
 
-        public void TryExclude(Desire desire, Student excluderStudent) {
+        public bool TryExclude(Desire desire, Student excluderStudent) {
 
 			foreach (Student existingStudent in new List<Student>(this.Result[desire.Name]))
 			{
 				if (Convert.ToDouble(excluderStudent.Total) > Convert.ToDouble(existingStudent.Total))
 				{
 					ReplaceStudents(desire, existingStudent, excluderStudent);
-                    return;
+                    return true;
                 } else if (Convert.ToDouble(excluderStudent.Total) == Convert.ToDouble(existingStudent.Total))
                 {
                     if(this.DoesHaveGreaterDegreeInSubject(excluderStudent, existingStudent, desire)) {
 						ReplaceStudents(desire, existingStudent, excluderStudent);
-                        return;
+                        return true;
                     }
-                } else if(Convert.ToInt32(excluderStudent.GradeYear) > Convert.ToInt32(existingStudent.GradeYear))
+                } else if(Convert.ToInt32(excluderStudent.GradeYear) < Convert.ToInt32(existingStudent.GradeYear))
                 {
 					ReplaceStudents(desire, existingStudent, excluderStudent);
-                    return;
+                    return true;
                 }
             }
+            return false;
 		}
 
 		private void ReplaceStudents(Desire desire, Student existingStudent, Student excluderStudent)
