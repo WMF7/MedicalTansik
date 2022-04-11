@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
     <title>@ViewBag.Title - النظام الالكتروني لتسجيل الرغبات  في كلية الطب </title>
 
     @Scripts.Render("~/bundles/modernizr")
@@ -25,13 +26,7 @@
 	</div>
 
     
-    <footer class="bg-primary text-light p-2 text-center" style="position: fixed; bottom: 0; right: 0; left: 0;">
-	<div class="container">
-	    &copy; @DateTime.Now.Year وحدة البرمجيات - مركز الخدمات الالكترونية و المعرفية - جامعة سوهاج <br>
-	     مدير مركز الخدمات الإلكترونية والمعرفية : د. محمد حشمت <br>
-	    مدير وحدة البرمجيات : م. أسماء أبوالدهب <br>
-	</div>
-    </footer>
+   
 
     @Scripts.Render("~/Content/mdb/js/mdb.min.js")
     @RenderSection("scripts", required: false)

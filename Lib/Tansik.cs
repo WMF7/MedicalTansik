@@ -158,6 +158,10 @@ namespace MedicalTansik.Lib
         {
             ApplicationDbContext db = new ApplicationDbContext();
             MedicalSubject medicalSubject = desire.MedicalSubject;
+            if (medicalSubject == null)
+			{
+                return "ممتاز";
+			}
             if (!medicalSubject.Name.Contains("هيستولوجي"))
             {
                 string takdir = db.StudentSubjectDegrees

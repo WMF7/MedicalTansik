@@ -52,11 +52,11 @@
 
     </tbody>
 </table>
-<button class="btn btn-primary">طباعة</button>
+<button class="btn btn-primary print">طباعة</button>
 
 @section scripts  {
     <script>
-        $("button").on("click", function () {
+        $(".print").on("click", function () {
             window.print();
         });
     </script>

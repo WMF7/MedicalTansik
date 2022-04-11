@@ -101,7 +101,7 @@
 	    for(var i=0; i<desiresElement.length; i++) {
 		desires.push($(desiresElement[i]).data("id"));
 	    }
-	    $.ajax("/Home/SaveDesires/", {
+	    $.ajax("/Med/Home/SaveDesires/", {
 		method: "POST",
 		data: {
 		    action: "ADD_DESIRES",
